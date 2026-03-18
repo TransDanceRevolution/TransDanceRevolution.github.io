@@ -1,7 +1,6 @@
 import Autoplay from "embla-carousel-autoplay"
 import { Button } from "~/components/ui/button"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
-import { DotWave } from "~/components/ui/dot-wave";
 import { homeImages } from "~/lib/consts";
 
 export default function Home() {
@@ -17,7 +16,7 @@ export default function Home() {
         <CarouselContent className="-ml-0">
           {
             homeImages.map((e) => (
-              <CarouselItem className="pl-0">
+              <CarouselItem key={e} className="pl-0">
                 <img className="object-cover min-w-0 min-h-0 h-96 md:h-200 w-full" src={e} />
               </CarouselItem>
             ))

@@ -1,8 +1,8 @@
 import { useMdxComponent, useMdxAttributes } from 'react-router-mdx/client'
-import { loadMdx, loadAllMdx } from 'react-router-mdx/server'
 import type { Route } from "./+types/post";
 
 export async function loader({ request }: Route.LoaderArgs) {
+    const { loadMdx } = await import("react-router-mdx/server");
     return loadMdx(request);
 }
 

@@ -8,10 +8,9 @@ export default {
   // Server-side render by default, to enable SPA mode set this to `false`
   ssr: false,
   async prerender() {
-    const paths = [
+    return [
       "/",
       ...(await mdx.paths().then((e) => e.map((p) => `/${p}`)))
     ];
-    return paths;
   },
 } satisfies Config
