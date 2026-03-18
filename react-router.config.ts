@@ -10,6 +10,7 @@ export default {
   async prerender() {
     return [
       "/",
+      "/posts",
       ...(await mdx.paths().then((e) => e.map((p) => `/${p}`)))
     ];
   },
