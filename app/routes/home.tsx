@@ -1,6 +1,9 @@
 import Autoplay from "embla-carousel-autoplay"
-import { Button } from "~/components/ui/button"
+import NaarmDescription from "~/components/home/NaarmDescription.mdx";
+import GadigalDescription from "~/components/home/GadigalDescription.mdx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { homeImages } from "~/lib/consts";
 
 export default function Home() {
@@ -34,7 +37,42 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="flex items-center justify-center p-3 flex-1">
-        <iframe className="w-96 aspect-500/713 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} />
+        <Tabs defaultValue="naarm" className={"max-w-md w-full"}>
+          <TabsList>
+            <TabsTrigger value="naarm">Naarm</TabsTrigger>
+            <TabsTrigger value="gadigal">Gadigal</TabsTrigger>
+          </TabsList>
+          <TabsContent value="naarm">
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  Naarm
+                </CardTitle>
+                <CardDescription className="prose">
+                  <NaarmDescription />
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="gadigal">
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  Gadigal
+                </CardTitle>
+                <CardDescription className="prose">
+                  <GadigalDescription />
+                </CardDescription>
+              </CardHeader>
+              {/* <CardContent>
+                <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} />
+              </CardContent> */}
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )
