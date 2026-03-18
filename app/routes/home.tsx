@@ -28,11 +28,15 @@ export default function Home() {
         <CarouselPrevious className="absolute left-0" />
         <CarouselNext className="absolute right-0" />
         <div className="absolute bottom-0 left-0">
-          <h1 className="text-2xl bg-primary text-primary-foreground">
-            Trans Dance Revolution
+          <h1 className="text-2xl">
+            <mark className="bg-primary text-primary-foreground">
+              Trans Dance Revolution
+            </mark>
           </h1>
-          <h2 className="bg-secondary text-secondary-foreground">
-            from Naarm, Gadigal to the world
+          <h2>
+            <mark className="bg-secondary text-secondary-foreground">
+              from Naarm, Gadigal to the world
+            </mark>
           </h2>
         </div>
       </Carousel>
@@ -42,10 +46,11 @@ export default function Home() {
             <div className="text-xs w-full pl-2">
               Where are you based?
             </div>
-            <TabsTrigger value="naarm">Naarm</TabsTrigger>
-            <TabsTrigger value="gadigal">Gadigal</TabsTrigger>
+            {
+              ["Naarm", "Gadigal"].map((e) => <TabsTrigger value={e} key={e}>{e}</TabsTrigger>)
+            }
           </TabsList>
-          <TabsContent value="naarm">
+          <TabsContent value="Naarm">
             <Card>
               <CardHeader>
                 <CardTitle>
@@ -60,7 +65,7 @@ export default function Home() {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="gadigal">
+          <TabsContent value="Gadigal">
             <Card>
               <CardHeader>
                 <CardTitle>
