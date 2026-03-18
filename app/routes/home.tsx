@@ -37,8 +37,11 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="flex items-center justify-center p-3 flex-1">
-        <Tabs defaultValue="naarm" className={"max-w-md w-full"}>
-          <TabsList>
+        <Tabs className={"max-w-md w-full"}>
+          <TabsList className={"w-full"}>
+            <div className="text-xs w-full pl-2">
+              Where are you based?
+            </div>
             <TabsTrigger value="naarm">Naarm</TabsTrigger>
             <TabsTrigger value="gadigal">Gadigal</TabsTrigger>
           </TabsList>
