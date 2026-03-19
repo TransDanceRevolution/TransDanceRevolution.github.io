@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
@@ -9,6 +10,7 @@ import {
 
 import type { Route } from "./+types/root"
 import "./app.css"
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./components/ui/navigation-menu"
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,6 +22,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <div className="sticky top-0 inset-y-0 z-50 bg-background">
+          <div className="h-16 max-w-7xl w-full mx-auto p-3 flex justify-between">
+            <Link className="w-32" to="/">
+              <img className="h-full w-auto min-w-0 min-h-0" src="/img/logo.png" />
+            </Link>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink render={<Link to="/">Home</Link>} />
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink render={<Link to="/posts">Blog</Link>} />
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+        </div>
         {children}
         <ScrollRestoration />
         <Scripts />

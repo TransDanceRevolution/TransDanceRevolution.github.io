@@ -27,17 +27,17 @@ export default function Home() {
         </CarouselContent>
         <CarouselPrevious className="absolute left-0" />
         <CarouselNext className="absolute right-0" />
-        <div className="absolute bottom-0 left-0">
-          <h1 className="text-2xl">
-            <mark className="bg-primary text-primary-foreground">
-              Trans Dance Revolution
-            </mark>
-          </h1>
-          <h2>
-            <mark className="bg-secondary text-secondary-foreground">
-              from Naarm, Gadigal to the world
-            </mark>
-          </h2>
+        <div className="absolute bottom-0 w-full inset-x-0">
+          <div className="max-w-7xl w-full mx-auto flex">
+            <div>
+              <h1 className="text-2xl bg-primary text-primary-foreground">
+                Trans Dance Revolution
+              </h1>
+              <h2 className="bg-secondary text-secondary-foreground">
+                from Naarm, Gadigal to the world
+              </h2>
+            </div>
+          </div>
         </div>
       </Carousel>
       <div className="flex items-center justify-center p-3 flex-1">

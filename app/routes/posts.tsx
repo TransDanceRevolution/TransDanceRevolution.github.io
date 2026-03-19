@@ -15,7 +15,7 @@ export async function loader() {
 export default function Posts() {
     const mdxFiles = useMdxFiles();
     const sortedMdxFiles = React.useMemo(() => mdxFiles.sort((a, b) => (b.date as unknown as Date).getTime() - (a.date as unknown as Date).getTime()), mdxFiles);
-    return <section>
+    return <section className="max-w-7xl w-full mx-auto">
         <Table>
             <TableCaption>A list of blog posts.</TableCaption>
             <TableHeader>
