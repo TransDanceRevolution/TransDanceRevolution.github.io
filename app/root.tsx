@@ -6,13 +6,26 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useLocation,
 } from "react-router"
 
 import type { Route } from "./+types/root"
 import "./app.css"
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./components/ui/navigation-menu"
+import React from "react";
+
+const paths: Record<string, { path: string, match?: RegExp }> = {
+  "Home": {
+    path: "/",
+  },
+  "Blog": {
+    path: "/posts",
+    match: /\/posts($|\/.*)/,
+  }
+};
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
   return (
     <html lang="en">
       <head>
@@ -29,12 +42,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </Link>
             <NavigationMenu>
               <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuLink render={<Link to="/">Home</Link>} />
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink render={<Link to="/posts">Blog</Link>} />
-                </NavigationMenuItem>
+                {
+                  Object.entries(paths).map(([n, { path, match }]) => (
+                    <NavigationMenuItem>
+                      <NavigationMenuLink active={match == null ? path === location.pathname : location.pathname.search(match) !== -1} render={<Link to={path}>{n}</Link>} />
+                    </NavigationMenuItem>
+                  ))
+                }
               </NavigationMenuList>
             </NavigationMenu>
           </div>
