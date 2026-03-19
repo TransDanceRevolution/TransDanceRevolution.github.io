@@ -5,11 +5,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { homeImages } from "~/lib/consts";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
+import React from "react";
 
 export default function Home() {
   const location = useLocation();
-  console.log(location.hash);
+  const based = React.useMemo(() => location.hash.length < 1 ? "Naarm" : location.hash.slice(1), [location]);
   return (
     <div className="flex flex-col min-h-[calc(100svh-64px)]">
       <Carousel
@@ -44,13 +45,13 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="flex items-center justify-center p-3 flex-1">
-        <Tabs defaultValue={location.hash.slice(1)} className={"max-w-md w-full"}>
+        <Tabs value={based} className={"max-w-md w-full"}>
           <TabsList className={"w-full"}>
             <div className="text-xs w-full pl-2">
               Where are you based?
             </div>
             {
-              ["Naarm", "Gadigal"].map((e) => <TabsTrigger value={e} key={e}>{e}</TabsTrigger>)
+              ["Naarm", "Gadigal"].map((e) => <TabsTrigger value={e} key={e} render={<Link to={`/#${e}`}>{e}</Link>} />)
             }
           </TabsList>
           <TabsContent id="Naarm" value="Naarm">
