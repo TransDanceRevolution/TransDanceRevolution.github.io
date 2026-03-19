@@ -5,8 +5,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { homeImages } from "~/lib/consts";
+import { useLocation } from "react-router";
 
 export default function Home() {
+  const location = useLocation();
+  console.log(location.hash);
   return (
     <div className="flex flex-col min-h-[calc(100svh-64px)]">
       <Carousel
@@ -41,7 +44,7 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="flex items-center justify-center p-3 flex-1">
-        <Tabs className={"max-w-md w-full"}>
+        <Tabs defaultValue={location.hash.slice(1)} className={"max-w-md w-full"}>
           <TabsList className={"w-full"}>
             <div className="text-xs w-full pl-2">
               Where are you based?
@@ -50,7 +53,7 @@ export default function Home() {
               ["Naarm", "Gadigal"].map((e) => <TabsTrigger value={e} key={e}>{e}</TabsTrigger>)
             }
           </TabsList>
-          <TabsContent value="Naarm">
+          <TabsContent id="Naarm" value="Naarm">
             <Card>
               <CardHeader>
                 <CardTitle>
@@ -65,7 +68,7 @@ export default function Home() {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="Gadigal">
+          <TabsContent id="Gadigal" value="Gadigal">
             <Card>
               <CardHeader>
                 <CardTitle>
