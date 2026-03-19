@@ -44,7 +44,7 @@ export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
     const attrs = loaderData?.attributes;
     let title = "Trans Dance Revolution Blog";
     if (attrs?.title != null) {
-        title = `${attrs.title} - ${title}`
+        title = `${attrs.title} - ${title}`;
     }
     return [
         { title },
