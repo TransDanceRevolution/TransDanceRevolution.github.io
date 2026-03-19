@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, type MetaFunction } from "react-router";
 import { useMdxFiles } from "react-router-mdx/client";
 import { Badge } from "~/components/ui/badge";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table";
@@ -11,6 +11,16 @@ export async function loader() {
 
     return allMdx.map((e) => ({ ...e, slug: `/posts/${basename(e.slug)}` }));
 }
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Trans Dance Revolution Blog" },
+    {
+      name: "description",
+      content: "Trans Dance Revolution Blog, from Naarm, Gadigal, to the world.",
+    },
+  ];
+};
 
 export default function Posts() {
     const mdxFiles = useMdxFiles();

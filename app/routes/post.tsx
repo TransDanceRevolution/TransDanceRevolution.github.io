@@ -5,6 +5,7 @@ import { useMdxComponent, useMdxAttributes } from 'react-router-mdx/client'
 import type { Route } from "./+types/post";
 import { videoExtensions } from "~/lib/consts";
 import { Badge } from "~/components/ui/badge";
+import type { MetaFunction } from "react-router";
 
 function MdxImg(props: React.ComponentProps<"img">) {
     const extension = (props.src ?? "").split(".", 2).at(1)?.toLowerCase();
@@ -38,6 +39,21 @@ export async function loader({ request }: Route.LoaderArgs) {
         },
     );
 }
+
+export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
+    const attrs = loaderData?.attributes;
+    let title = "Trans Dance Revolution Blog";
+    if (attrs?.title != null) {
+        title = `${attrs.title} - ${title}`
+    }
+    return [
+        { title },
+        {
+            name: "description",
+            content: "Trans Dance Revolution Blog, from Naarm, Gadigal, to the world.",
+        },
+    ];
+};
 
 export default function Route() {
     const Component = useMdxComponent({ img: MdxImg });

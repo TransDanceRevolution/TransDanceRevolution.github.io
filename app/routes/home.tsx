@@ -5,8 +5,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { homeImages } from "~/lib/consts";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, type MetaFunction } from "react-router";
 import React from "react";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Trans Dance Revolution" },
+    {
+      name: "description",
+      content: "Trans Dance Revolution Jam, from Naarm, Gadigal, to the world.",
+    },
+  ];
+};
 
 export default function Home() {
   const location = useLocation();
@@ -79,9 +89,10 @@ export default function Home() {
                   <GadigalDescription />
                 </CardDescription>
               </CardHeader>
-              {/* <CardContent>
-                <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} />
-              </CardContent> */}
+              <CardContent>
+                <img className="shadow border" src="/img/gadigal-graphic.png" />
+                {/* <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} /> */}
+              </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
