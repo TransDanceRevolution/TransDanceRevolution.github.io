@@ -32,7 +32,7 @@ export default function Posts() {
                         const tags = e.tags as unknown as string[] ?? [];
                         return (
                             <TableRow key={e.slug}>
-                                <TableCell className="font-medium"><Link className="w-full block" to={e.slug}>{e.title}</Link></TableCell>
+                                <TableCell><Link className="w-full h-full block -m-2 p-2 font-medium underline" to={e.slug}>{e.title}</Link></TableCell>
                                 <TableCell className="w-32 flex gap-1 overflow-scroll">{tags.map((e) => <Badge key={e}>{e}</Badge>)}</TableCell>
                                 <TableCell>{(date) instanceof Date ? date.toDateString() : "undefined"}</TableCell>
                             </TableRow>

@@ -8,7 +8,7 @@ import { homeImages } from "~/lib/consts";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-svh">
+    <div className="flex flex-col min-h-[calc(100svh-64px)]">
       <Carousel
         plugins={[
           Autoplay({

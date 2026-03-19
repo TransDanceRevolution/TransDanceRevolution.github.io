@@ -10,7 +10,7 @@ import {
 
 import type { Route } from "./+types/root"
 import "./app.css"
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./components/ui/navigation-menu"
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./components/ui/navigation-menu"
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
