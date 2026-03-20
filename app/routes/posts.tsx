@@ -31,7 +31,7 @@ export default function Posts() {
             <TableHeader>
                 <TableRow>
                     <TableHead>Title</TableHead>
-                    <TableHead className="w-32">Tags</TableHead>
+                    <TableHead>Tags</TableHead>
                     <TableHead className="w-24">Date</TableHead>
                 </TableRow>
             </TableHeader>
@@ -43,7 +43,7 @@ export default function Posts() {
                         return (
                             <TableRow key={e.slug}>
                                 <TableCell><Link className="w-full h-full block -m-2 p-2 font-medium underline" to={e.slug}>{e.title}</Link></TableCell>
-                                <TableCell className="w-32 flex gap-1 overflow-scroll">{tags.map((e) => <Badge key={e}>{e}</Badge>)}</TableCell>
+                                <TableCell className="flex gap-1 overflow-scroll">{tags.map((e) => <Badge key={e}>{e}</Badge>)}</TableCell>
                                 <TableCell>{(date) instanceof Date ? date.toDateString() : "undefined"}</TableCell>
                             </TableRow>
                         );
