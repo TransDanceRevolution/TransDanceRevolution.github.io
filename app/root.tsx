@@ -19,6 +19,8 @@ import {
   NavigationMenuTrigger,
 } from "./components/ui/navigation-menu"
 import React from "react"
+import AcknowledgementOfCountryDialog from "./components/acknowledgement-of-country/acknowledgement-of-country-dialog"
+import { useDialogStore } from "./stores/dialog"
 
 const paths: Record<string, { path: string; match?: RegExp }> = {
   Home: {
@@ -31,7 +33,11 @@ const paths: Record<string, { path: string; match?: RegExp }> = {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const location = useLocation()
+  const location = useLocation();
+  const { shouldShow: shouldShow_, setShown } = useDialogStore();
+  // to work around bug regarding dialog switching too fast
+  // and also make sure popup doesn't block screen on non-js environments
+  const shouldShow = React.useDeferredValue(shouldShow_, false);
   return (
     <html lang="en">
       <head>
@@ -41,7 +47,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <div className="sticky inset-y-0 top-0 z-50 bg-background">
+        <AcknowledgementOfCountryDialog open={shouldShow} onOpenChange={setShown} />
+        <div id="navbar" className="sticky inset-y-0 top-0 z-50 bg-background">
           <div className="mx-auto flex h-16 w-full max-w-7xl justify-between p-3">
             <Link className="w-32" to="/">
               <img
