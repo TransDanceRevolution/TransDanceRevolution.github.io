@@ -5,9 +5,9 @@ import NaarmDescription from "./NaarmDescription.mdx"
 import GadigalDescription from "./GadigalDescription.mdx"
 
 export const slideshowImages: React.FC<{ className: string }>[] = [
-  ({ className }) => <img className={className} src={dancersAlleyImage} />,
-  ({ className }) => <img className={className} src={moriartyWalk} />,
-  ({ className }) => <img className={className} src={imaxImage} />,
+  (...props) => <img {...props} src={dancersAlleyImage} />,
+  (...props) => <img {...props} src={moriartyWalk} />,
+  (...props) => <img {...props} src={imaxImage} />,
 ]
 
 export const places: {
