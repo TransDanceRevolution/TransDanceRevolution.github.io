@@ -67,7 +67,7 @@ export default function Posts() {
                     {e.title}
                   </Link>
                 </TableCell>
-                <TableCell className="flex gap-1 overflow-scroll">
+                <TableCell className="flex gap-1">
                   {tags.map((e) => (
                     <Badge key={e}>{e}</Badge>
                   ))}
