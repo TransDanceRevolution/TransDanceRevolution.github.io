@@ -52,7 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavigationMenu>
               <NavigationMenuList>
                 {Object.entries(paths).map(([n, { path, match }]) => (
-                  <NavigationMenuItem>
+                  <NavigationMenuItem key={n}>
                     <NavigationMenuLink
                       active={
                         match == null

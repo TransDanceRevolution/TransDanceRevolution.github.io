@@ -23,7 +23,6 @@ export const places: {
         className="aspect-500/565 w-full border shadow"
         src="https://www.instagram.com/p/DUzTTX_j_NK/embed/"
         scrolling="no"
-        allowTransparency={true}
       />
     ),
   },
@@ -33,4 +32,4 @@ export const places: {
       <img className="border shadow" src="/img/gadigal-graphic.png" />
     ),
   },
-} as const;
+} as const

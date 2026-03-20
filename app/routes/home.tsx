@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import { slideshowImages, places } from "~/components/home";
+import { slideshowImages, places } from "~/components/home"
 import { Link, useLocation, type MetaFunction } from "react-router"
 import React from "react"
 
@@ -26,7 +26,7 @@ export const meta: MetaFunction = () => {
       content: "Trans Dance Revolution Jam, from Naarm, Gadigal, to the world.",
     },
   ]
-};
+}
 
 export default function Home() {
   const location = useLocation()
@@ -77,12 +77,13 @@ export default function Home() {
               <TabsTrigger
                 value={e}
                 key={e}
+                nativeButton={false}
                 render={<Link to={`/#${e}`}>{e}</Link>}
               />
             ))}
           </TabsList>
           {Object.entries(places).map(([n, { Description, Content }]) => (
-            <TabsContent id={n} value={n}>
+            <TabsContent key={n} id={n} value={n}>
               <Card>
                 <CardHeader>
                   <CardTitle>{n}</CardTitle>

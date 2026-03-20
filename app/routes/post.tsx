@@ -62,7 +62,7 @@ export default function Route() {
         </h1>
         <div className="flex w-full gap-1 overflow-hidden">
           {((attributes.tags as unknown as string[]) ?? []).map((e) => (
-            <Badge>{e}</Badge>
+            <Badge key={e}>{e}</Badge>
           ))}
         </div>
         <div className="prose max-w-7xl">
