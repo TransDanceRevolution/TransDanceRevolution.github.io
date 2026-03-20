@@ -52,6 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="mx-auto flex h-16 w-full max-w-7xl justify-between p-3">
             <Link className="w-32" to="/">
               <img
+                alt="TDR Logo"
                 className="h-full min-h-0 w-auto min-w-0"
                 src="/img/logo.png"
               />
