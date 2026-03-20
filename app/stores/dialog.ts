@@ -1,9 +1,9 @@
-import { create } from 'zustand'
-import { persist } from "zustand/middleware";
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
 export type DialogStore = {
-  shouldShow: boolean,
-  setShown: () => void,
+  shouldShow: boolean
+  setShown: () => void
 }
 
 export const useDialogStore = create(
@@ -15,5 +15,5 @@ export const useDialogStore = create(
     {
       name: "dialog-store",
     }
-  ),
-);
+  )
+)

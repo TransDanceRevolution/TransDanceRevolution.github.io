@@ -5,9 +5,19 @@ import NaarmDescription from "./descriptions/naarm-description.mdx"
 import GadigalDescription from "./descriptions/gadigal-description.mdx"
 
 export const slideshowImages: React.FC<{ className: string }>[] = [
-  ({ className }) => <img alt="Dancers Alley Billboard" className={className} src={dancersAlleyImage} />,
-  ({ className }) => <img alt="Dancers Alley" className={className} src={moriartyWalk} />,
-  ({ className }) => <img alt="IMAX Melbourne" className={className} src={imaxImage} />,
+  ({ className }) => (
+    <img
+      alt="Dancers Alley Billboard"
+      className={className}
+      src={dancersAlleyImage}
+    />
+  ),
+  ({ className }) => (
+    <img alt="Dancers Alley" className={className} src={moriartyWalk} />
+  ),
+  ({ className }) => (
+    <img alt="IMAX Melbourne" className={className} src={imaxImage} />
+  ),
 ]
 
 export const places: {
@@ -29,7 +39,11 @@ export const places: {
   Gadigal: {
     Description: GadigalDescription,
     Content: () => (
-      <img alt="TDR Gadigal Graphic" className="border shadow" src="/img/gadigal-graphic.png" />
+      <img
+        alt="TDR Gadigal Graphic"
+        className="border shadow"
+        src="/img/gadigal-graphic.png"
+      />
     ),
   },
 } as const
