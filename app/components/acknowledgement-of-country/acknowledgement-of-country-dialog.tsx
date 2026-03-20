@@ -4,8 +4,8 @@ import AcknowledgementOfCountryContent from "./acknowledgement-of-country-conten
 import type { DialogRoot } from "@base-ui/react";
 
 export default function AcknowledgementOfCountryDialog(props: Omit<DialogRoot.Props, "children">) {
-    return <Dialog disablePointerDismissal={true} {...props}>
-        <DialogContent className="sm:max-w-md">
+    return <Dialog disablePointerDismissal={true} modal={true} {...props}>
+        <DialogContent showCloseButton={false} className="sm:max-w-md">
             <DialogHeader>
                 <DialogTitle>Acknowledgment of Country</DialogTitle>
                 <DialogDescription className={"prose pt-3"}>
