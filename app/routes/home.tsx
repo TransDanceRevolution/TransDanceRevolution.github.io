@@ -1,6 +1,4 @@
 import Autoplay from "embla-carousel-autoplay"
-import NaarmDescription from "~/components/home/NaarmDescription.mdx"
-import GadigalDescription from "~/components/home/GadigalDescription.mdx"
 import {
   Card,
   CardContent,
@@ -16,7 +14,7 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import { slideshowImages } from "~/components/home/index"
+import { slideshowImages, places } from "~/components/home";
 import { Link, useLocation, type MetaFunction } from "react-router"
 import React from "react"
 
@@ -28,32 +26,7 @@ export const meta: MetaFunction = () => {
       content: "Trans Dance Revolution Jam, from Naarm, Gadigal, to the world.",
     },
   ]
-}
-
-const places: {
-  [k: string]: {
-    Description: React.ComponentType
-    Content: React.ComponentType
-  }
-} = {
-  Naarm: {
-    Description: NaarmDescription,
-    Content: () => (
-      <iframe
-        className="aspect-500/565 w-full border shadow"
-        src="https://www.instagram.com/p/DUzTTX_j_NK/embed/"
-        scrolling="no"
-        allowTransparency={true}
-      />
-    ),
-  },
-  Gadigal: {
-    Description: GadigalDescription,
-    Content: () => (
-      <img className="border shadow" src="/img/gadigal-graphic.png" />
-    ),
-  },
-} as const
+};
 
 export default function Home() {
   const location = useLocation()

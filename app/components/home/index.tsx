@@ -1,8 +1,8 @@
 import dancersAlleyImage from "./img/Digital-Screens-in-Tumbalong-Boulevard-1.png"
 import moriartyWalk from "./img/ICC_Sydney_Convention_Centre_Moriarty_Walk_2017.jpg"
 import imaxImage from "./img/IMAX_Melbourne_Museum.jpg"
-import NaarmDescription from "./NaarmDescription.mdx"
-import GadigalDescription from "./GadigalDescription.mdx"
+import NaarmDescription from "./descriptions/NaarmDescription.mdx"
+import GadigalDescription from "./descriptions/GadigalDescription.mdx"
 
 export const slideshowImages: React.FC<{ className: string }>[] = [
   (...props) => <img {...props} src={dancersAlleyImage} />,
@@ -33,4 +33,4 @@ export const places: {
       <img className="border shadow" src="/img/gadigal-graphic.png" />
     ),
   },
-} as const
+} as const;
