@@ -18,9 +18,21 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const places: { [k: string]: { Description: React.ComponentType, Content: React.ComponentType } } = {
+  "Naarm": {
+    Description: NaarmDescription,
+    Content: () => <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} />,
+  },
+  "Gadigal": {
+    Description: GadigalDescription,
+    Content: () => <img className="shadow border" src="/img/gadigal-graphic.png" />,
+  },
+} as const;
+
 export default function Home() {
   const location = useLocation();
-  const based = React.useMemo(() => location.hash.length < 1 ? "Naarm" : location.hash.slice(1), [location]);
+  const hashValue = React.useMemo(() => location.hash.length < 1 ? "" : location.hash.slice(1), [location]);
+  const place = React.useMemo(() => hashValue in places ? hashValue : "Naarm", [hashValue]);
   return (
     <div className="flex flex-col min-h-[calc(100svh-64px)]">
       <Carousel
@@ -55,46 +67,34 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="flex items-center justify-center p-3 flex-1">
-        <Tabs value={based} className={"max-w-md w-full"}>
+        <Tabs value={place} className={"max-w-md w-full"}>
           <TabsList className={"w-full"}>
             <div className="text-xs w-full pl-2">
               Where are you based?
             </div>
             {
-              ["Naarm", "Gadigal"].map((e) => <TabsTrigger value={e} key={e} render={<Link to={`/#${e}`}>{e}</Link>} />)
+              Object.keys(places).map((e) => <TabsTrigger value={e} key={e} render={<Link to={`/#${e}`}>{e}</Link>} />)
             }
           </TabsList>
-          <TabsContent id="Naarm" value="Naarm">
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  Naarm
-                </CardTitle>
-                <CardDescription className="prose">
-                  <NaarmDescription />
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} />
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent id="Gadigal" value="Gadigal">
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  Gadigal
-                </CardTitle>
-                <CardDescription className="prose">
-                  <GadigalDescription />
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <img className="shadow border" src="/img/gadigal-graphic.png" />
-                {/* <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} /> */}
-              </CardContent>
-            </Card>
-          </TabsContent>
+          {
+            Object.entries(places).map(([n, { Description, Content }]) => (
+              <TabsContent id={n} value={n}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      {n}
+                    </CardTitle>
+                    <CardDescription className="prose">
+                      <Description />
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Content />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            ))
+          }
         </Tabs>
       </div>
     </div>
