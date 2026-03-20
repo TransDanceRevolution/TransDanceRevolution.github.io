@@ -11,21 +11,27 @@ import {
 
 import type { Route } from "./+types/root"
 import "./app.css"
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./components/ui/navigation-menu"
-import React from "react";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "./components/ui/navigation-menu"
+import React from "react"
 
-const paths: Record<string, { path: string, match?: RegExp }> = {
-  "Home": {
+const paths: Record<string, { path: string; match?: RegExp }> = {
+  Home: {
     path: "/",
   },
-  "Blog": {
+  Blog: {
     path: "/posts",
     match: /\/posts($|\/.*)/,
-  }
-};
+  },
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
+  const location = useLocation()
   return (
     <html lang="en">
       <head>
@@ -35,20 +41,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <div className="sticky top-0 inset-y-0 z-50 bg-background">
-          <div className="h-16 max-w-7xl w-full mx-auto p-3 flex justify-between">
+        <div className="sticky inset-y-0 top-0 z-50 bg-background">
+          <div className="mx-auto flex h-16 w-full max-w-7xl justify-between p-3">
             <Link className="w-32" to="/">
-              <img className="h-full w-auto min-w-0 min-h-0" src="/img/logo.png" />
+              <img
+                className="h-full min-h-0 w-auto min-w-0"
+                src="/img/logo.png"
+              />
             </Link>
             <NavigationMenu>
               <NavigationMenuList>
-                {
-                  Object.entries(paths).map(([n, { path, match }]) => (
-                    <NavigationMenuItem>
-                      <NavigationMenuLink active={match == null ? path === location.pathname : location.pathname.search(match) !== -1} render={<Link to={path}>{n}</Link>} />
-                    </NavigationMenuItem>
-                  ))
-                }
+                {Object.entries(paths).map(([n, { path, match }]) => (
+                  <NavigationMenuItem>
+                    <NavigationMenuLink
+                      active={
+                        match == null
+                          ? path === location.pathname
+                          : location.pathname.search(match) !== -1
+                      }
+                      render={<Link to={path}>{n}</Link>}
+                    />
+                  </NavigationMenuItem>
+                ))}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
