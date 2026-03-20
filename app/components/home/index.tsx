@@ -1,0 +1,23 @@
+import dancersAlleyImage from "./img/Digital-Screens-in-Tumbalong-Boulevard-1.png";
+import moriartyWalk from "./img/ICC_Sydney_Convention_Centre_Moriarty_Walk_2017.jpg";
+import imaxImage from "./img/IMAX_Melbourne_Museum.jpg";
+import NaarmDescription from "./NaarmDescription.mdx";
+import GadigalDescription from "./GadigalDescription.mdx";
+
+export const slideshowImages: React.FC<{ className: string }>[] = [
+  ({ className }) => <img className={className} src={dancersAlleyImage} />,
+  ({ className }) => <img className={className} src={moriartyWalk} />,
+  ({ className }) => <img className={className} src={imaxImage} />
+];
+
+export const places: { [k: string]: { Description: React.ComponentType, Content: React.ComponentType } } = {
+  "Naarm": {
+    Description: NaarmDescription,
+    Content: () => <iframe className="w-full aspect-500/565 border shadow" src="https://www.instagram.com/p/DUzTTX_j_NK/embed/" scrolling="no" allowTransparency={true} />,
+  },
+  "Gadigal": {
+    Description: GadigalDescription,
+    Content: () => <img className="shadow border" src="/img/gadigal-graphic.png" />,
+  },
+} as const;
+

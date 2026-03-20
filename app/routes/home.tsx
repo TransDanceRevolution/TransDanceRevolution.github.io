@@ -4,7 +4,7 @@ import GadigalDescription from "~/components/home/GadigalDescription.mdx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "~/components/ui/carousel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { homeImages } from "~/lib/consts";
+import { slideshowImages } from "~/components/home/index";
 import { Link, useLocation, type MetaFunction } from "react-router";
 import React from "react";
 
@@ -44,9 +44,9 @@ export default function Home() {
       >
         <CarouselContent className="-ml-0">
           {
-            homeImages.map((e) => (
-              <CarouselItem key={e} className="pl-0">
-                <img className="object-cover min-w-0 min-h-0 h-96 md:h-200 w-full" src={e} />
+            slideshowImages.map((Image, i) => (
+              <CarouselItem key={i} className="pl-0">
+                <Image className="object-cover min-w-0 min-h-0 h-96 md:h-200 w-full" />
               </CarouselItem>
             ))
           }

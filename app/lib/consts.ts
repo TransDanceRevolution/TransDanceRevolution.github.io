@@ -1,13 +1,3 @@
-import dancersAlleyImage from "~/components/home/img/Digital-Screens-in-Tumbalong-Boulevard-1.png";
-import moriartyWalk from "~/components/home/img/ICC_Sydney_Convention_Centre_Moriarty_Walk_2017.jpg";
-import imaxImage from "~/components/home/img/IMAX_Melbourne_Museum.jpg";
-
-export const homeImages = [
-    dancersAlleyImage,
-    moriartyWalk,
-    imaxImage,
-];
-
 export const videoExtensions = [
 	"3g2",
 	"3gp",
