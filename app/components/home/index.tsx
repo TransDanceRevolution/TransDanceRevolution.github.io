@@ -30,7 +30,7 @@ export const places: {
   Naarm: {
     Description: () => <>
       <NaarmDescription />
-      <NaarmJamLocation />
+      {/* <NaarmJamLocation /> */}
     </>,
     Content: () => (
       <iframe
