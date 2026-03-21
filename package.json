@@ -56,5 +56,10 @@
   "optionalDependencies": {
     "@tinacms/cli": "^2.1.11",
     "tinacms": "^3.6.3"
+  },
+  "overrides": {
+    "sqlite-level": {
+      "better-sqlite3": "^12.8.0"
+    }
   }
 }
