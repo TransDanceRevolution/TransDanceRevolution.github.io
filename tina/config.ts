@@ -1,4 +1,5 @@
 import { defineConfig } from "tinacms";
+import { Post } from "./collections/post";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -34,53 +35,7 @@ export default defineConfig({
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/r/content-modelling-collections/
   schema: {
     collections: [
-      {
-        name: "post",
-        label: "Posts",
-        path: "posts",
-        format: "mdx",
-        ui: {
-          allowedActions: {
-            createNestedFolder: false,
-            createFolder: false,
-          }
-        },
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "datetime",
-            name: 'date',
-            label: 'Created At',
-            required: true,
-          },
-          {
-            type: 'string',
-            name: 'tags',
-            label: 'Tags',
-            description: 'Tags for this post',
-            list: true,
-            required: true,
-            ui: {
-              component: 'tags',
-            },
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
-          },
-        ],
-        // ui: {
-        //   router: ({ document }) => `/posts/${document._sys.filename}`,
-        // },
-      },
+      Post,
       {
         name: "data",
         label: "Data",
