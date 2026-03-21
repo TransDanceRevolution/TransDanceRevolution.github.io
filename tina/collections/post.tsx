@@ -4,12 +4,6 @@ export const Post: Collection = {
     label: "Posts",
     path: "posts",
     format: "mdx",
-    ui: {
-        allowedActions: {
-            createNestedFolder: false,
-            createFolder: false,
-        }
-    },
     fields: [
         {
             type: "string",
@@ -42,7 +36,11 @@ export const Post: Collection = {
             isBody: true,
         },
     ],
-    // ui: {
-    //   router: ({ document }) => `/posts/${document._sys.filename}`,
-    // },
+    ui: {
+        allowedActions: {
+            createNestedFolder: false,
+            createFolder: false,
+        },
+        router: ({ document }) => `/posts/${document._sys.filename}`,
+    },
 };

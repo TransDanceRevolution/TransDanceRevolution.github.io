@@ -1,19 +1,21 @@
-import remarkGfm from "remark-gfm"
-import remarkEmbedder from "@remark-embedder/core"
-import oembedTransformer from "@remark-embedder/transformer-oembed"
-import { useMdxComponent, useMdxAttributes } from "react-router-mdx/client"
+import { useTina } from "tinacms/dist/react";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
 import type { Route } from "./+types/post"
 import { videoExtensions } from "~/lib/consts"
 import { Badge } from "~/components/ui/badge"
-import type { MetaFunction } from "react-router"
+import { useLoaderData } from "react-router"
 
-function MdxImg(props: React.ComponentProps<"img">) {
-  const extension = (props.src ?? "").split(".", 2).at(1)?.toLowerCase()
+function MdxImg(props: {
+    url: string;
+    caption?: string | undefined;
+    alt?: string | undefined;
+} | undefined) {
+  const extension = (props?.url ?? "").split(".", 2).at(1)?.toLowerCase()
 
   if (extension != null && videoExtensions.includes(extension)) {
     return (
-      <video controls preload="metadata" className="w-full" title={props.alt}>
-        <source src={props.src} type={`video/${extension}`} />
+      <video controls preload="metadata" className="w-full" title={props?.alt}>
+        <source src={props?.url} type={`video/${extension}`} />
         Your browser does not support the video tag.
       </video>
     )
@@ -22,22 +24,14 @@ function MdxImg(props: React.ComponentProps<"img">) {
   return <img {...props} />
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const { loadMdx } = await import("react-router-mdx/server")
-  return loadMdx(request, {
-    remarkPlugins: [
-      remarkGfm,
-      [remarkEmbedder, { transformers: [oembedTransformer] }],
-    ],
-  })
+export async function loader({ params }: Route.LoaderArgs) {
+  const { client } = await import("~/../tina/__generated__/client");
+  const res = await client.queries.post({ relativePath: `${params.slug}.mdx` });
+  return res;
 }
 
-export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
-  const attrs = loaderData?.attributes
-  let title = "Trans Dance Revolution Blog"
-  if (attrs?.title != null) {
-    title = `${attrs.title} - ${title}`
-  }
+export const meta: Route.MetaFunction = ({ loaderData }) => {
+  const title = `${loaderData.data.post.title} - Trans Dance Revolution Blog`;
   return [
     { title },
     {
@@ -49,26 +43,27 @@ export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
 }
 
 export default function Route() {
-  const Component = useMdxComponent({ img: MdxImg })
-  const attributes = useMdxAttributes()
+  const loaderData = useLoaderData<typeof loader>();
+  const { data } = useTina(loaderData);
 
   return (
     <section className="flex w-full items-center justify-center p-3">
       <div className="max-w-7xl space-y-3">
         <h1 className="text-3xl">
           <mark className="bg-primary text-primary-foreground">
-            {attributes.title}
+            {data.post.title}
           </mark>
         </h1>
         <div className="flex w-full gap-1 overflow-hidden">
-          {((attributes.tags as unknown as string[]) ?? []).map((e) => (
+          {data.post.tags.map((e) => (
             <Badge key={e}>{e}</Badge>
           ))}
         </div>
         <div className="prose max-w-7xl">
-          <Component />
+          <TinaMarkdown components={{ img: MdxImg }} content={data.post.body} />
         </div>
       </div>
     </section>
   )
 }
+

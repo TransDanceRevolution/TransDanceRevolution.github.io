@@ -1,6 +1,7 @@
 import React from "react"
-import { Link, type MetaFunction } from "react-router"
+import { Link, useLoaderData, type MetaFunction } from "react-router"
 import { useMdxFiles } from "react-router-mdx/client"
+import { useTina } from "tinacms/react"
 import { Badge } from "~/components/ui/badge"
 import {
   Table,
@@ -13,11 +14,8 @@ import {
 } from "~/components/ui/table"
 
 export async function loader() {
-  const { basename } = await import("node:path")
-  const { loadAllMdx } = await import("react-router-mdx/server")
-  const allMdx = await loadAllMdx()
-
-  return allMdx.map((e) => ({ ...e, slug: `/posts/${basename(e.slug)}` }))
+  const { client } = await import("~/../tina/__generated__/client");
+  return await client.queries.postConnection();
 }
 
 export const meta: MetaFunction = () => {
@@ -32,16 +30,19 @@ export const meta: MetaFunction = () => {
 }
 
 export default function Posts() {
-  const mdxFiles = useMdxFiles()
-  const sortedMdxFiles = React.useMemo(
+  const loaderData = useLoaderData<typeof loader>();
+  const { data } = useTina(loaderData);
+  const sortedEdges = React.useMemo(
     () =>
-      mdxFiles.sort(
-        (a, b) =>
-          (b.date as unknown as Date).getTime() -
-          (a.date as unknown as Date).getTime()
-      ),
-    mdxFiles
-  )
+      (data.postConnection.edges ?? [])
+        .flatMap((e) => e?.node == null ? [] : e)
+        .sort(
+          (a, b) =>
+            new Date(b.node!.date).getTime() -
+            new Date(a.node!.date).getTime()
+        ),
+    [data.postConnection.edges]
+  );
   return (
     <section className="mx-auto w-full max-w-7xl">
       <Table>
@@ -54,26 +55,26 @@ export default function Posts() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedMdxFiles.map((e) => {
-            const date = e.date as unknown
-            const tags = (e.tags as unknown as string[]) ?? []
+          {sortedEdges?.map((e) => {
+            const node = e?.node;
+            if (node == null) return;
             return (
-              <TableRow key={e.slug}>
+              <TableRow key={node.id}>
                 <TableCell>
                   <Link
                     className="-m-2 block h-full w-full p-2 font-medium underline"
-                    to={e.slug}
+                    to={`/${node.id.split(".", 2)[0]}`}
                   >
-                    {e.title}
+                    {node.title}
                   </Link>
                 </TableCell>
                 <TableCell className="flex gap-1">
-                  {tags.map((e) => (
+                  {node.tags.map((e) => (
                     <Badge key={e}>{e}</Badge>
                   ))}
                 </TableCell>
                 <TableCell>
-                  {date instanceof Date ? date.toDateString() : "undefined"}
+                  {new Date(node.date).toDateString()}
                 </TableCell>
               </TableRow>
             )
