@@ -1,4 +1,5 @@
-export const videoExtensions = [
+import postTags_ from "./postTags.json";
+export const videoExtensions: string[] = [
   "3g2",
   "3gp",
   "aaf",
@@ -33,4 +34,6 @@ export const videoExtensions = [
   "webm",
   "wmv",
   "yuv",
-]
+];
+
+export const postTags: string[] = postTags_.body.map((e) => e.value);

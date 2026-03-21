@@ -1,4 +1,5 @@
 import { defineConfig } from "tinacms";
+import { postTags } from "../app/lib/consts/arrays";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -69,6 +70,8 @@ export default defineConfig({
             ui: {
               component: 'tags',
             },
+            options: postTags,
+            
           },
           {
             type: "rich-text",
@@ -100,6 +103,39 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
+          },
+        ],
+      },
+      {
+        name: "consts",
+        label: "Constants (Lists)",
+        path: "app/lib/consts/arrays",
+        format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+            createNestedFolder: false,
+            createFolder: false,
+          }
+        },
+        fields: [
+          {
+            type: "object",
+            name: "body",
+            label: "Body",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item.value }),
+            },
+            fields: [
+              {
+                name: "value",
+                label: "Value",
+                type: "string",
+                required: true,
+              }
+            ],
           },
         ],
       }
