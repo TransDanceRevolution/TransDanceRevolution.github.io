@@ -69,7 +69,7 @@ export default function Home() {
           </div>
         </div>
       </Carousel>
-      <div className="flex md:flex-row flex-col items-center md:items-stretch p-3 w-full max-w-7xl mx-auto gap-3">
+      <div className="flex md:flex-row flex-col items-center md:items-stretch py-3 w-full max-w-7xl mx-auto gap-3">
         <Card className="w-full max-w-md md:max-w-full flex">
           <CardHeader className="h-full">
             <CardTitle>Why?</CardTitle>
