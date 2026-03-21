@@ -50,4 +50,6 @@ export const places: {
       />
     ),
   },
-} as const
+} as const;
+
+export { default as About } from "./about.mdx"; 

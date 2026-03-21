@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import { slideshowImages, places } from "~/components/home"
+import { About, slideshowImages, places } from "~/components/home"
 import { Link, useLocation, type MetaFunction } from "react-router"
 import React from "react"
 
@@ -69,10 +69,20 @@ export default function Home() {
           </div>
         </div>
       </Carousel>
-      <div className="flex flex-1 items-center justify-center p-3">
+      <div className="flex md:flex-row flex-col items-center md:items-stretch p-3 w-full max-w-7xl mx-auto gap-3">
+        <Card className="w-full max-w-md md:max-w-full flex">
+          <CardHeader className="h-full">
+            <CardTitle>Why?</CardTitle>
+            <div className="flex items-center justify-center">
+              <CardDescription className="prose max-w-full! lg:text-base">
+                <About />
+              </CardDescription>
+            </div>
+          </CardHeader>
+        </Card>
         <Tabs value={place} className={"w-full max-w-md"}>
           <TabsList className={"w-full"}>
-            <div className="w-full pl-2 text-xs">Where are you based?</div>
+            <div className="w-full pl-2 text-xs">Interested? Where are you based?</div>
             {Object.keys(places).map((e) => (
               <TabsTrigger
                 value={e}
