@@ -63,9 +63,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-remix-build-
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} --include=optional
       - name: Static HTML export with Remix
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build
+        run: ${{ steps.detect-package-manager.outputs.manager }} run tina:build
+        env:
+          VITE_TINA_CLIENT_ID: ${{ vars.VITE_TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          TINA_INDEXER_TOKEN: ${{ secrets.TINA_INDEXER_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

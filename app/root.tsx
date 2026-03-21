@@ -33,7 +33,12 @@ const paths: Record<string, { path: string; match?: RegExp }> = {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const location = useLocation()
+  const location = useLocation();
+  React.useEffect(() => {
+    if (location.pathname.search(/\/admin($|\/)/) !== -1) {
+      window.location.pathname = "/admin/index.html";
+    }
+  }, [location]);
   const { shouldShow: shouldShow_, setShown } = useDialogStore()
   // to work around bug regarding dialog switching too fast
   // and also make sure popup doesn't block screen on non-js environments
