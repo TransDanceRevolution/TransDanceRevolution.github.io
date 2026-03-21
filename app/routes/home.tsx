@@ -57,7 +57,7 @@ export default function Home() {
         <CarouselPrevious className="absolute left-0" />
         <CarouselNext className="absolute right-0" />
         <div className="absolute inset-x-0 bottom-0 w-full">
-          <div className="mx-auto flex w-full max-w-7xl">
+          <div className="mx-auto flex w-full max-w-7xl px-3">
             <div>
               <h1 className="bg-primary text-2xl text-primary-foreground">
                 Trans Dance Revolution
@@ -69,7 +69,7 @@ export default function Home() {
           </div>
         </div>
       </Carousel>
-      <div className="flex md:flex-row flex-col items-center md:items-stretch py-3 w-full max-w-7xl mx-auto gap-3">
+      <div className="flex md:flex-row flex-col items-center md:items-stretch p-3 w-full max-w-7xl mx-auto gap-3">
         <Card className="w-full max-w-md md:max-w-full flex">
           <CardHeader className="h-full">
             <CardTitle>Why?</CardTitle>
@@ -80,7 +80,8 @@ export default function Home() {
             </div>
           </CardHeader>
         </Card>
-        <Tabs value={place} className={"w-full max-w-md"}>
+        <div className="w-full max-w-md">
+          <Tabs value={place} className={"md:sticky top-18"}>
           <TabsList className={"w-full"}>
             <div className="w-full pl-2 text-xs">Interested? Where are you based?</div>
             {Object.keys(places).map((e) => (
@@ -108,6 +109,7 @@ export default function Home() {
             </TabsContent>
           ))}
         </Tabs>
+        </div>
       </div>
     </div>
   )
