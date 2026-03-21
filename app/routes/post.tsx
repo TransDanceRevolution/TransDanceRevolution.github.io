@@ -10,7 +10,8 @@ function MdxImg(props: {
     caption?: string | undefined;
     alt?: string | undefined;
 } | undefined) {
-  const extension = (props?.url ?? "").split(".", 2).at(1)?.toLowerCase()
+  const pathname = props?.url.replace(/^.*?:\/\/.*?\//, "");
+  const extension = (pathname ?? "").split(".", 2).at(1)?.toLowerCase()
 
   if (extension != null && videoExtensions.includes(extension)) {
     return (
