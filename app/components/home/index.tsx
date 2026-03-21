@@ -3,6 +3,7 @@ import moriartyWalk from "./img/ICC_Sydney_Convention_Centre_Moriarty_Walk_2017.
 import imaxImage from "./img/IMAX_Melbourne_Museum.jpg"
 import NaarmDescription from "./descriptions/naarm-description.mdx"
 import GadigalDescription from "./descriptions/gadigal-description.mdx"
+import NaarmJamLocation from "./descriptions/naarm-jam-location"
 
 export const slideshowImages: React.FC<{ className: string }>[] = [
   ({ className }) => (
@@ -27,7 +28,10 @@ export const places: {
   }
 } = {
   Naarm: {
-    Description: NaarmDescription,
+    Description: () => <>
+      <NaarmDescription />
+      <NaarmJamLocation />
+    </>,
     Content: () => (
       <iframe
         className="aspect-500/565 w-full border shadow"

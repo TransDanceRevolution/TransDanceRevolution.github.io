@@ -55,7 +55,7 @@ export default function NaarmJamLocation() {
 
   return (
     <>
-      If your device's date-time is set correctly, this week's Jam {prefix}
+      If your device's date is set correctly, this week's Jam {prefix}
       <a href={venue.mapsUrl}>{venue.label}</a> ({jamDate.toDateString()}).
     </>
   );
