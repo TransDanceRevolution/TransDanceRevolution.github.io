@@ -1,7 +1,8 @@
 import type { Config } from "@react-router/dev/config"
 import { init } from "react-router-mdx/server"
+import { client } from "./tina/__generated__/client";
 
-const mdx = init({ path: "posts" })
+const things = await client.queries.postConnection();
 
 export default {
   // Config options...
@@ -11,7 +12,7 @@ export default {
     return [
       "/",
       "/posts",
-      ...(await mdx.paths().then((e) => e.map((p) => `/${p}`))),
+      ...things.data.postConnection.edges!.map((e) => `/${e!.node!.id.split(".", 2)[0]!}`),
     ]
   },
 } satisfies Config
