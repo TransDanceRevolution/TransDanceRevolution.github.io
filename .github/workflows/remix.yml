@@ -65,7 +65,7 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} --include=optional
       - name: Static HTML export with Remix
-        run: ${{ steps.detect-package-manager.outputs.manager }} run tina:build
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build
         env:
           VITE_TINA_CLIENT_ID: ${{ vars.VITE_TINA_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}

@@ -1,6 +1,5 @@
 import React from "react"
 import { Link, useLoaderData, type MetaFunction } from "react-router"
-import { useMdxFiles } from "react-router-mdx/client"
 import { useTina } from "tinacms/react"
 import { Badge } from "~/components/ui/badge"
 import {
