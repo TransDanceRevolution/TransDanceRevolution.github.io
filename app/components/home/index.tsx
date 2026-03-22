@@ -33,23 +33,27 @@ export const places: {
       {/* <NaarmJamLocation /> */}
     </>,
     Content: () => (
-      <iframe
-        className="aspect-500/565 w-full border shadow"
-        src="https://www.instagram.com/p/DUzTTX_j_NK/embed/"
-        scrolling="no"
-        loading="lazy"
-      />
+      <div className="border shadow pb-[calc(100%+52px)] relative">
+        <iframe
+          className="w-full h-full absolute inset-0"
+          src="https://www.instagram.com/p/DWLam2LE82U/embed/"
+          scrolling="no"
+          loading="lazy"
+        />
+      </div>
     ),
   },
   Gadigal: {
     Description: GadigalDescription,
     Content: () => (
-      <iframe
-        className="aspect-500/565 w-full border shadow"
-        src="https://www.instagram.com/p/DWLam2LE82U/embed/"
-        scrolling="no"
-        loading="lazy"
-      />
+      <div className="border shadow pb-[calc(100%+52px)] relative">
+        <iframe
+          className="w-full h-full absolute inset-0"
+          src="https://www.instagram.com/p/DWLam2LE82U/embed/"
+          scrolling="no"
+          loading="lazy"
+        />
+      </div>
     ),
   },
 } as const;
