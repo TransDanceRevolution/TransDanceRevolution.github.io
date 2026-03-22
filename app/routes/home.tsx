@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
-import { About, slideshowImages, places } from "~/components/home"
+import { About, slideshowImages, places, GroundRules } from "~/components/home"
 import { Link, useLocation, type MetaFunction } from "react-router"
 import React from "react"
 
@@ -70,7 +70,8 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="flex md:flex-row flex-col items-center md:items-stretch p-3 w-full max-w-7xl mx-auto gap-3">
-        <Card className="w-full max-w-md md:max-w-full flex">
+        <div className="w-full max-w-md md:max-w-full space-y-3">
+        <Card className="flex">
           <CardHeader className="h-full">
             <CardTitle>Why?</CardTitle>
             <div className="flex items-center justify-center">
@@ -80,6 +81,17 @@ export default function Home() {
             </div>
           </CardHeader>
         </Card>
+        <Card className="flex">
+          <CardHeader className="h-full">
+            <CardTitle>Ground Rules</CardTitle>
+            <div className="flex items-center justify-center">
+              <CardDescription className="prose max-w-full! lg:text-base">
+                <GroundRules />
+              </CardDescription>
+            </div>
+          </CardHeader>
+        </Card>
+        </div>
         <div className="w-full max-w-md">
           <Tabs value={place} className={"md:sticky top-18"}>
           <TabsList className={"w-full"}>

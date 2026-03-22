@@ -37,19 +37,22 @@ export const places: {
         className="aspect-500/565 w-full border shadow"
         src="https://www.instagram.com/p/DUzTTX_j_NK/embed/"
         scrolling="no"
+        loading="lazy"
       />
     ),
   },
   Gadigal: {
     Description: GadigalDescription,
     Content: () => (
-      <img
-        alt="TDR Gadigal Graphic"
-        className="border shadow"
-        src="/img/gadigal-graphic.png"
+      <iframe
+        className="aspect-500/565 w-full border shadow"
+        src="https://www.instagram.com/p/DWLam2LE82U/embed/"
+        scrolling="no"
+        loading="lazy"
       />
     ),
   },
 } as const;
 
 export { default as About } from "./about.mdx"; 
+export { default as GroundRules } from "./ground-rules.mdx"; 
