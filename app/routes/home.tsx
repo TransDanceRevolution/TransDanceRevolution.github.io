@@ -12,6 +12,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "~/components/ui/carousel"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import { About, slideshowImages, places, GroundRules } from "~/components/home"
@@ -29,6 +30,7 @@ export const meta: MetaFunction = () => {
 }
 
 export default function Home() {
+  const [api, setApi] = React.useState<CarouselApi>()
   const location = useLocation()
   const hashValue = React.useMemo(
     () => (location.hash.length < 1 ? "" : location.hash.slice(1)),
@@ -46,6 +48,7 @@ export default function Home() {
             delay: 5000,
           }),
         ]}
+        setApi={setApi}
       >
         <CarouselContent className="-ml-0">
           {slideshowImages.map((Image, i) => (
@@ -54,8 +57,14 @@ export default function Home() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-0" />
-        <CarouselNext className="absolute right-0" />
+        <CarouselPrevious onClick={(e) => {
+          e.stopPropagation();
+          api?.scrollPrev();
+        }} className="absolute left-0" />
+        <CarouselNext onClick={(e) => {
+          e.stopPropagation();
+          api?.scrollNext();
+        }} className="absolute right-0" />
         <div className="absolute inset-x-0 bottom-0 w-full">
           <div className="mx-auto flex w-full max-w-7xl px-3">
             <div>
