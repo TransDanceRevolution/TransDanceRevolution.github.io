@@ -43,7 +43,7 @@ export const places: {
       <div className="relative border pb-[calc(100%+52px)] shadow">
         <iframe
           className="absolute inset-0 h-full w-full"
-          src="https://www.instagram.com/p/DWLam2LE82U/embed/"
+          src="https://www.instagram.com/p/DUzTTX_j_NK/embed/"
           scrolling="no"
           loading="lazy"
         />
