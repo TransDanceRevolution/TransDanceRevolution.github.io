@@ -63,6 +63,10 @@
     "@tinacms/app": {
       "react": "^19",
       "react-dom": "^19"
+    },
+    "react-final-form": {
+      "react": "^19",
+      "react-dom": "^19"
     }
   }
 }
