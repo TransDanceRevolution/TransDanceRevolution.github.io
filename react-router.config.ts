@@ -1,7 +1,7 @@
 import type { Config } from "@react-router/dev/config"
-import { client } from "./tina/__generated__/client";
+import { client } from "./tina/__generated__/client"
 
-const res = await client.queries.postConnection();
+const res = await client.queries.postConnection()
 
 export default {
   // Config options...
@@ -11,7 +11,9 @@ export default {
     return [
       "/",
       "/posts",
-      ...res.data.postConnection.edges!.map((e) => `/${e!.node!.id.replace(/\.mdx?$/, "")}`),
+      ...res.data.postConnection.edges!.map(
+        (e) => `/${e!.node!.id.replace(/\.mdx?$/, "")}`
+      ),
     ]
   },
 } satisfies Config

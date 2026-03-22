@@ -57,14 +57,20 @@ export default function Home() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious onClick={(e) => {
-          e.stopPropagation();
-          api?.scrollPrev();
-        }} className="absolute left-0" />
-        <CarouselNext onClick={(e) => {
-          e.stopPropagation();
-          api?.scrollNext();
-        }} className="absolute right-0" />
+        <CarouselPrevious
+          onClick={(e) => {
+            e.stopPropagation()
+            api?.scrollPrev()
+          }}
+          className="absolute left-0"
+        />
+        <CarouselNext
+          onClick={(e) => {
+            e.stopPropagation()
+            api?.scrollNext()
+          }}
+          className="absolute right-0"
+        />
         <div className="absolute inset-x-0 bottom-0 w-full">
           <div className="mx-auto flex w-full max-w-7xl px-3">
             <div>
@@ -78,58 +84,60 @@ export default function Home() {
           </div>
         </div>
       </Carousel>
-      <div className="flex md:flex-row flex-col items-center md:items-stretch p-3 w-full max-w-7xl mx-auto gap-3">
-        <div className="w-full max-w-md md:max-w-full space-y-3">
-        <Card className="flex">
-          <CardHeader className="h-full">
-            <CardTitle>Why?</CardTitle>
-            <div className="flex items-center justify-center">
-              <CardDescription className="prose max-w-full! lg:text-base">
-                <About />
-              </CardDescription>
-            </div>
-          </CardHeader>
-        </Card>
-        <Card className="flex">
-          <CardHeader className="h-full">
-            <CardTitle>Ground Rules</CardTitle>
-            <div className="flex items-center justify-center">
-              <CardDescription className="prose max-w-full! lg:text-base">
-                <GroundRules />
-              </CardDescription>
-            </div>
-          </CardHeader>
-        </Card>
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-3 p-3 md:flex-row md:items-stretch">
+        <div className="w-full max-w-md space-y-3 md:max-w-full">
+          <Card className="flex">
+            <CardHeader className="h-full">
+              <CardTitle>Why?</CardTitle>
+              <div className="flex items-center justify-center">
+                <CardDescription className="prose max-w-full! lg:text-base">
+                  <About />
+                </CardDescription>
+              </div>
+            </CardHeader>
+          </Card>
+          <Card className="flex">
+            <CardHeader className="h-full">
+              <CardTitle>Ground Rules</CardTitle>
+              <div className="flex items-center justify-center">
+                <CardDescription className="prose max-w-full! lg:text-base">
+                  <GroundRules />
+                </CardDescription>
+              </div>
+            </CardHeader>
+          </Card>
         </div>
         <div className="w-full max-w-md">
-          <Tabs value={place} className={"md:sticky top-18"}>
-          <TabsList className={"w-full"}>
-            <div className="w-full pl-2 text-xs">Interested? Where are you based?</div>
-            {Object.keys(places).map((e) => (
-              <TabsTrigger
-                value={e}
-                key={e}
-                nativeButton={false}
-                render={<Link to={`/#${e}`}>{e}</Link>}
-              />
+          <Tabs value={place} className={"top-18 md:sticky"}>
+            <TabsList className={"w-full"}>
+              <div className="w-full pl-2 text-xs">
+                Interested? Where are you based?
+              </div>
+              {Object.keys(places).map((e) => (
+                <TabsTrigger
+                  value={e}
+                  key={e}
+                  nativeButton={false}
+                  render={<Link to={`/#${e}`}>{e}</Link>}
+                />
+              ))}
+            </TabsList>
+            {Object.entries(places).map(([n, { Description, Content }]) => (
+              <TabsContent key={n} id={n} value={n}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{n}</CardTitle>
+                    <CardDescription className="prose">
+                      <Description />
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Content />
+                  </CardContent>
+                </Card>
+              </TabsContent>
             ))}
-          </TabsList>
-          {Object.entries(places).map(([n, { Description, Content }]) => (
-            <TabsContent key={n} id={n} value={n}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{n}</CardTitle>
-                  <CardDescription className="prose">
-                    <Description />
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Content />
-                </CardContent>
-              </Card>
-            </TabsContent>
-          ))}
-        </Tabs>
+          </Tabs>
         </div>
       </div>
     </div>

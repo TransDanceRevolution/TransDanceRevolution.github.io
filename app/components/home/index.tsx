@@ -18,7 +18,11 @@ export const slideshowImages: React.FC<{ className: string }>[] = [
     <img alt="Dancers Alley" className={className} src={moriartyWalk} />
   ),
   ({ className }) => (
-    <img alt="IMAX Melbourne" className={cn("object-[50%_85%]", className)} src={imaxImage} />
+    <img
+      alt="IMAX Melbourne"
+      className={cn("object-[50%_85%]", className)}
+      src={imaxImage}
+    />
   ),
 ]
 
@@ -29,14 +33,16 @@ export const places: {
   }
 } = {
   Naarm: {
-    Description: () => <>
-      <NaarmDescription />
-      {/* <NaarmJamLocation /> */}
-    </>,
+    Description: () => (
+      <>
+        <NaarmDescription />
+        {/* <NaarmJamLocation /> */}
+      </>
+    ),
     Content: () => (
-      <div className="border shadow pb-[calc(100%+52px)] relative">
+      <div className="relative border pb-[calc(100%+52px)] shadow">
         <iframe
-          className="w-full h-full absolute inset-0"
+          className="absolute inset-0 h-full w-full"
           src="https://www.instagram.com/p/DWLam2LE82U/embed/"
           scrolling="no"
           loading="lazy"
@@ -47,9 +53,9 @@ export const places: {
   Gadigal: {
     Description: GadigalDescription,
     Content: () => (
-      <div className="border shadow pb-[calc(100%+52px)] relative">
+      <div className="relative border pb-[calc(100%+52px)] shadow">
         <iframe
-          className="w-full h-full absolute inset-0"
+          className="absolute inset-0 h-full w-full"
           src="https://www.instagram.com/p/DWLam2LE82U/embed/"
           scrolling="no"
           loading="lazy"
@@ -57,7 +63,7 @@ export const places: {
       </div>
     ),
   },
-} as const;
+} as const
 
-export { default as About } from "./about.mdx"; 
-export { default as GroundRules } from "./ground-rules.mdx"; 
+export { default as About } from "./about.mdx"
+export { default as GroundRules } from "./ground-rules.mdx"

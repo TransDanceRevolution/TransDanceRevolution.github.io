@@ -13,8 +13,8 @@ import {
 } from "~/components/ui/table"
 
 export async function loader() {
-  const { client } = await import("~/../tina/__generated__/client");
-  return await client.queries.postConnection();
+  const { client } = await import("~/../tina/__generated__/client")
+  return await client.queries.postConnection()
 }
 
 export const meta: MetaFunction = () => {
@@ -29,19 +29,18 @@ export const meta: MetaFunction = () => {
 }
 
 export default function Posts() {
-  const loaderData = useLoaderData<typeof loader>();
-  const { data } = useTina(loaderData);
+  const loaderData = useLoaderData<typeof loader>()
+  const { data } = useTina(loaderData)
   const sortedEdges = React.useMemo(
     () =>
       (data.postConnection.edges ?? [])
-        .flatMap((e) => e?.node == null ? [] : e)
+        .flatMap((e) => (e?.node == null ? [] : e))
         .sort(
           (a, b) =>
-            new Date(b.node!.date).getTime() -
-            new Date(a.node!.date).getTime()
+            new Date(b.node!.date).getTime() - new Date(a.node!.date).getTime()
         ),
     [data.postConnection.edges]
-  );
+  )
   return (
     <section className="mx-auto w-full max-w-7xl">
       <Table>
@@ -55,8 +54,8 @@ export default function Posts() {
         </TableHeader>
         <TableBody>
           {sortedEdges?.map((e) => {
-            const node = e?.node;
-            if (node == null) return;
+            const node = e?.node
+            if (node == null) return
             return (
               <TableRow key={node.id}>
                 <TableCell>
@@ -72,9 +71,7 @@ export default function Posts() {
                     <Badge key={e}>{e}</Badge>
                   ))}
                 </TableCell>
-                <TableCell>
-                  {new Date(node.date).toDateString()}
-                </TableCell>
+                <TableCell>{new Date(node.date).toDateString()}</TableCell>
               </TableRow>
             )
           })}

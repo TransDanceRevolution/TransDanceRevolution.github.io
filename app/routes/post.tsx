@@ -1,16 +1,20 @@
-import { useTina } from "tinacms/dist/react";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { useTina } from "tinacms/dist/react"
+import { TinaMarkdown } from "tinacms/dist/rich-text"
 import type { Route } from "./+types/post"
 import { videoExtensions } from "~/lib/consts"
 import { Badge } from "~/components/ui/badge"
 import { useLoaderData } from "react-router"
 
-function MdxImg(props: {
-    url: string;
-    caption?: string | undefined;
-    alt?: string | undefined;
-} | undefined) {
-  const pathname = props?.url.replace(/^.*?:\/\/.*?\//, "");
+function MdxImg(
+  props:
+    | {
+        url: string
+        caption?: string | undefined
+        alt?: string | undefined
+      }
+    | undefined
+) {
+  const pathname = props?.url.replace(/^.*?:\/\/.*?\//, "")
   const extension = (pathname ?? "").split(".", 2).at(1)?.toLowerCase()
 
   if (extension != null && videoExtensions.includes(extension)) {
@@ -26,13 +30,13 @@ function MdxImg(props: {
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const { client } = await import("~/../tina/__generated__/client");
-  const res = await client.queries.post({ relativePath: `${params.slug}.mdx` });
-  return res;
+  const { client } = await import("~/../tina/__generated__/client")
+  const res = await client.queries.post({ relativePath: `${params.slug}.mdx` })
+  return res
 }
 
 export const meta: Route.MetaFunction = ({ loaderData }) => {
-  const title = `${loaderData.data.post.title} - Trans Dance Revolution Blog`;
+  const title = `${loaderData.data.post.title} - Trans Dance Revolution Blog`
   return [
     { title },
     {
@@ -44,8 +48,8 @@ export const meta: Route.MetaFunction = ({ loaderData }) => {
 }
 
 export default function Route() {
-  const loaderData = useLoaderData<typeof loader>();
-  const { data } = useTina(loaderData);
+  const loaderData = useLoaderData<typeof loader>()
+  const { data } = useTina(loaderData)
 
   return (
     <section className="flex w-full items-center justify-center p-3">
@@ -67,4 +71,3 @@ export default function Route() {
     </section>
   )
 }
-
