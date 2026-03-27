@@ -84,6 +84,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         {children}
+        <div className="max-w-7xl mx-auto p-3 flex justify-between">
+          {/* <div className="prose text-xs">
+            <p>Hosts: </p>
+            <ul>
+              <li><Link to="https://www.instagram.com/spooky_binch/">@spooky_binch</Link></li>
+            </ul>
+            <ul>
+              <li><Link to="https://www.instagram.com/0x7amyy/">@0x7amyy</Link></li>
+            </ul>
+            <p>Graphic Design: </p>
+            <ul>
+              <li><Link to="https://www.instagram.com/roxy.fury/">@roxy.fury</Link></li>
+            </ul>
+          </div> */}
+          <div className="text-xs">
+            ©2026 Trans Dance Revolution
+          </div>
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
