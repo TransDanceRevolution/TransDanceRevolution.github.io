@@ -35,6 +35,11 @@ export const Post: Collection = {
       label: "Body",
       isBody: true,
     },
+    {
+      type: "boolean",
+      name: "unlisted",
+      label: "Unlisted",
+    }
   ],
   ui: {
     allowedActions: {
@@ -42,5 +47,10 @@ export const Post: Collection = {
       createFolder: false,
     },
     router: ({ document }) => `/posts/${document._sys.filename}`,
+    // filename: {
+    //   slugify: ({ title }) => {
+    //     return title.
+    //   }
+    // },
   },
 }

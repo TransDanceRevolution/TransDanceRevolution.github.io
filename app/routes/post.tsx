@@ -32,6 +32,7 @@ function MdxImg(
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
   const res = await client.queries.post({ relativePath: `${params.slug}.mdx` })
+    console.log(res);
   return res
 }
 

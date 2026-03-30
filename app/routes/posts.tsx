@@ -35,6 +35,7 @@ export default function Posts() {
     () =>
       (data.postConnection.edges ?? [])
         .flatMap((e) => (e?.node == null ? [] : e))
+        .filter((e) => !e.node?.unlisted)
         .sort(
           (a, b) =>
             new Date(b.node!.date).getTime() - new Date(a.node!.date).getTime()
