@@ -24,7 +24,6 @@ export const Post: Collection = {
       label: "Tags",
       description: "Tags for this post",
       list: true,
-      required: true,
       ui: {
         component: "tags",
       },

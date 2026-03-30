@@ -68,7 +68,7 @@ export default function Posts() {
                   </Link>
                 </TableCell>
                 <TableCell className="flex gap-1">
-                  {node.tags.map((e) => (
+                  {node.tags?.map((e) => (
                     <Badge key={e}>{e}</Badge>
                   ))}
                 </TableCell>

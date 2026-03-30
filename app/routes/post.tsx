@@ -60,7 +60,7 @@ export default function Route() {
           </mark>
         </h1>
         <div className="flex w-full gap-1 overflow-hidden">
-          {data.post.tags.map((e) => (
+          {data.post.tags?.map((e) => (
             <Badge key={e}>{e}</Badge>
           ))}
         </div>
