@@ -58,6 +58,7 @@ jobs:
         with:
           path: |
             build/client
+            tina/__generated__
             .react-router
           key: ${{ runner.os }}-nuxt-build-${{ hashFiles('build/client') }}
           restore-keys: |
