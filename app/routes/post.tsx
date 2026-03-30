@@ -32,7 +32,6 @@ function MdxImg(
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
   const res = await client.queries.post({ relativePath: `${params.slug}.mdx` })
-    console.log(res);
   return res
 }
 
@@ -54,7 +53,7 @@ export default function Route() {
 
   return (
     <section className="flex w-full items-center justify-center p-3">
-      <div className="max-w-7xl space-y-3">
+      <div className="max-w-7xl space-y-3 w-full">
         <h1 className="text-3xl">
           <mark className="bg-primary text-primary-foreground">
             {data.post.title}
