@@ -60,7 +60,7 @@ jobs:
             build/client
             tina/__generated__
             .react-router
-          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('build/client') }}
+          key: ${{ runner.os }}-remix-build-${{ hashFiles('build/client') }}
           restore-keys: |
             ${{ runner.os }}-remix-build-
       - name: Install dependencies
