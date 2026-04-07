@@ -131,7 +131,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   const client = useAdminTinaClient();
-  console.log(client);
+  React.useEffect(() => { client?.postConnection().then((e) => console.log(e), () => {}) }, [client]);
 
   return (
     <main className="container mx-auto p-4 pt-16">
