@@ -4,30 +4,7 @@ import type { Route } from "./+types/post"
 import { videoExtensions } from "~/lib/consts"
 import { Badge } from "~/components/ui/badge"
 import { useLoaderData } from "react-router"
-
-function MdxImg(
-  props:
-    | {
-        url: string
-        caption?: string | undefined
-        alt?: string | undefined
-      }
-    | undefined
-) {
-  const pathname = props?.url.replace(/^.*?:\/\/.*?\//, "")
-  const extension = (pathname ?? "").split(".", 2).at(1)?.toLowerCase()
-
-  if (extension != null && videoExtensions.includes(extension)) {
-    return (
-      <video controls preload="metadata" className="w-full" title={props?.alt}>
-        <source src={props?.url} type={`video/${extension}`} />
-        Your browser does not support the video tag.
-      </video>
-    )
-  }
-
-  return <img {...props} />
-}
+import PostSection from "~/components/post/post-section"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
@@ -52,22 +29,6 @@ export default function Route() {
   const { data } = useTina(loaderData)
 
   return (
-    <section className="flex w-full items-center justify-center p-3">
-      <div className="max-w-7xl space-y-3 w-full">
-        <h1 className="text-3xl">
-          <mark className="bg-primary text-primary-foreground">
-            {data.post.title}
-          </mark>
-        </h1>
-        <div className="flex w-full gap-1 overflow-hidden">
-          {data.post.tags?.map((e) => (
-            <Badge key={e}>{e}</Badge>
-          ))}
-        </div>
-        <div className="prose max-w-7xl">
-          <TinaMarkdown components={{ img: MdxImg }} content={data.post.body} />
-        </div>
-      </div>
-    </section>
+    <PostSection post={data.post} />
   )
 }

@@ -14,6 +14,7 @@ export default {
       ...res.data.postConnection.edges!.map(
         (e) => `/${e!.node!.id.replace(/\.mdx?$/, "")}`
       ),
+      "/404",
     ]
   },
 } satisfies Config
