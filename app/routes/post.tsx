@@ -2,6 +2,7 @@ import { useTina } from "tinacms/dist/react"
 import type { Route } from "./+types/post"
 import { isRouteErrorResponse, useLoaderData } from "react-router"
 import PostSection from "~/components/post/post-section"
+import { PostDocument } from "tina/__generated__/types"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
@@ -23,29 +24,43 @@ export const meta: Route.MetaFunction = ({ loaderData }) => {
 
 export function ErrorBoundary({
   error,
+  params
 }: Route.ErrorBoundaryProps) {
-  console.log("post error");
-  if (isRouteErrorResponse(error)) {
-    return (
-      <>
-        <h1>
-          {error.status} {error.statusText}
-        </h1>
-        <p>{error.data}</p>
-      </>
-    );
-  } else if (error instanceof Error) {
-    return (
-      <div>
-        <h1>Error</h1>
-        <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-      </div>
-    );
-  } else {
-    return <h1>Unknown Error</h1>;
+  const { data } = useTina({
+    data: { post: null as any },
+    query: PostDocument,
+    variables: { relativePath: `${params.slug}.mdx` }
+  });
+  if (data.post != null) {
+    return <PostSection post={data.post} />
   }
+
+  let message = "Oops!"
+  let details = "An unexpected error occurred."
+  let stack: string | undefined
+
+  if (isRouteErrorResponse(error)) {
+    message = error.status === 404 ? "404" : "Error"
+    details =
+      error.status === 404
+        ? "The requested page could not be found."
+        : error.statusText || details
+  } else if (import.meta.env.DEV && error && error instanceof Error) {
+    details = error.message
+    stack = error.stack
+  }
+
+  return (
+    <main className="container mx-auto p-4 pt-16">
+      <h1>{message}</h1>
+      <p>{details}</p>
+      {stack && (
+        <pre className="w-full overflow-x-auto p-4">
+          <code>{stack}</code>
+        </pre>
+      )}
+    </main>
+  )
 }
 
 export default function Route() {
