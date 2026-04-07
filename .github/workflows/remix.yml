@@ -69,6 +69,8 @@ jobs:
           VITE_TINA_CLIENT_ID: ${{ vars.VITE_TINA_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           TINA_INDEXER_TOKEN: ${{ secrets.TINA_INDEXER_TOKEN }}
+      - name: Move 404 file
+        run: mv ./build/client/404/index.html ./build/client/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
