@@ -24,12 +24,12 @@ export const meta: Route.MetaFunction = ({ loaderData }) => {
 
 export function ErrorBoundary({ error, params }: Route.ErrorBoundaryProps) {
   const { data } = useTina({
-    data: { post: null as any },
+    data: {},
     query: PostDocument,
     variables: { relativePath: `${params.slug}.mdx` },
   })
-  if (data.post != null) {
-    return <PostSection post={data.post} />
+  if ("post" in data) {
+    return <PostSection post={data.post as any} />
   }
 
   let message = "Oops!"
