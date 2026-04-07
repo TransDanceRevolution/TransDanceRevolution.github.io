@@ -28,6 +28,7 @@ export function ErrorBoundary({ error, params }: Route.ErrorBoundaryProps) {
     query: PostDocument,
     variables: { relativePath: `${params.slug}.mdx` },
   })
+  console.log(data)
   if ("post" in data) {
     return <PostSection post={data.post as any} />
   }
