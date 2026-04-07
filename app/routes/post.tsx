@@ -22,15 +22,12 @@ export const meta: Route.MetaFunction = ({ loaderData }) => {
   ]
 }
 
-export function ErrorBoundary({
-  error,
-  params
-}: Route.ErrorBoundaryProps) {
+export function ErrorBoundary({ error, params }: Route.ErrorBoundaryProps) {
   const { data } = useTina({
     data: { post: null as any },
     query: PostDocument,
-    variables: { relativePath: `${params.slug}.mdx` }
-  });
+    variables: { relativePath: `${params.slug}.mdx` },
+  })
   if (data.post != null) {
     return <PostSection post={data.post} />
   }
@@ -67,7 +64,5 @@ export default function Route() {
   const loaderData = useLoaderData<typeof loader>()
   const { data } = useTina(loaderData)
 
-  return (
-    <PostSection post={data.post} />
-  )
+  return <PostSection post={data.post} />
 }

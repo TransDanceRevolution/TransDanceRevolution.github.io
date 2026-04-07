@@ -38,7 +38,7 @@ export const Post: Collection = {
       type: "boolean",
       name: "unlisted",
       label: "Unlisted",
-    }
+    },
   ],
   ui: {
     allowedActions: {

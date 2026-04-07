@@ -84,7 +84,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         {children}
-        <div className="max-w-7xl mx-auto p-3 flex justify-between">
+        <div className="mx-auto flex max-w-7xl justify-between p-3">
           {/* <div className="prose text-xs">
             <p>Hosts: </p>
             <ul>
@@ -98,9 +98,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <li><Link to="https://www.instagram.com/roxy.fury/">@roxy.fury</Link></li>
             </ul>
           </div> */}
-          <div className="text-xs">
-            ©2026 Trans Dance Revolution
-          </div>
+          <div className="text-xs">©2026 Trans Dance Revolution</div>
         </div>
         <ScrollRestoration />
         <Scripts />
