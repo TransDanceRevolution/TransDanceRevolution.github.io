@@ -1,8 +1,5 @@
 import { useTina } from "tinacms/dist/react"
-import { TinaMarkdown } from "tinacms/dist/rich-text"
 import type { Route } from "./+types/post"
-import { videoExtensions } from "~/lib/consts"
-import { Badge } from "~/components/ui/badge"
 import { useLoaderData } from "react-router"
 import PostSection from "~/components/post/post-section"
 
