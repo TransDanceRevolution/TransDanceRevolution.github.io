@@ -65,10 +65,10 @@ export const Post: Collection = {
               name: "controls",
               label: "Enable Controls",
               type: "boolean",
-            }
-          ]
-        }
-      ]
+            },
+          ],
+        },
+      ],
     },
     {
       type: "boolean",

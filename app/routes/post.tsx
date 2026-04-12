@@ -25,16 +25,20 @@ export const meta: Route.MetaFunction = ({ loaderData }) => {
 
 export function ErrorBoundary({ error, params }: Route.ErrorBoundaryProps) {
   // options need to be memo'd for some reason to prevent excessive rerender.
-  const query = React.useMemo(() => ({
-    data: { post: {} },
-    query: PostDocument,
-    variables: { relativePath: `${params.slug}.mdx` },
-  } satisfies Parameters<typeof useTina>[0]), [params.slug]);
-  const { data } = useTina(query);
-  
+  const query = React.useMemo(
+    () =>
+      ({
+        data: { post: {} },
+        query: PostDocument,
+        variables: { relativePath: `${params.slug}.mdx` },
+      }) satisfies Parameters<typeof useTina>[0],
+    [params.slug]
+  )
+  const { data } = useTina(query)
+
   // only show preview if post section is correctly set
   if (Object.keys(data.post).length > 1) {
-    return <PostSection post={data.post as any} />;
+    return <PostSection post={data.post as any} />
   }
 
   let message = "Oops!"
