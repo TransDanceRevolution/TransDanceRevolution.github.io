@@ -37,6 +37,10 @@ function MdxVideo({ src, ...props }: any) {
   )
 }
 
+function MdxIFrame(props: any) {
+  return <iframe {...props} />;
+}
+
 export default function PostSection({
   className,
   post,
@@ -61,7 +65,7 @@ export default function PostSection({
         </div>
         <div className="prose max-w-7xl prose-video:mx-auto">
           <TinaMarkdown
-            components={{ img: MdxImg, video: MdxVideo }}
+            components={{ img: MdxImg, video: MdxVideo, iframe: MdxIFrame }}
             content={post.body}
           />
         </div>

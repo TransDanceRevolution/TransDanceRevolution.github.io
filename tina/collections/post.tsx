@@ -1,3 +1,5 @@
+import htmlElements from "./html-elements.json";
+console.log(htmlElements);
 import type { Collection } from "tinacms"
 export const Post: Collection = {
   name: "post",
@@ -67,6 +69,20 @@ export const Post: Collection = {
               label: "Enable Controls",
               type: "boolean",
             },
+          ],
+        },
+        {
+          name: "iframe",
+          label: "iFrame",
+          fields: [
+            ...(
+              [
+                ...Object.keys(htmlElements.iframe.attributes),
+                ...Object.keys(htmlElements["*"].attributes)
+              ]
+                .filter((e) => !e.includes("-"))
+                .map((e) => ({ name: e, type: "string" } as any))
+            ),
           ],
         },
       ],
