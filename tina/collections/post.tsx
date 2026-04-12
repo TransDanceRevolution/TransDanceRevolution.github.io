@@ -82,6 +82,16 @@ export const Post: Collection = {
       createFolder: false,
     },
     router: ({ document }) => `/posts/${document._sys.filename}`,
+    filename: {
+      slugify: ({ title }) => {
+        return (title ?? "")
+          .toLowerCase() // Convert to lowercase
+          .replace(/[^a-z0-9 -]/g, "") // Remove invalid characters
+          .replace(/\s+/g, "-") // Replace spaces with hyphens
+          .replace(/-+/g, "-") // Replace multiple hyphens with a single hyphen
+          .replace(/^-+|-+$/g, "")
+      },
+    },
     // filename: {
     //   slugify: ({ title }) => {
     //     return title.
