@@ -28,6 +28,13 @@ function MdxImg(
   return <img {...props} />
 }
 
+function MdxVideo({ src, ...props }: any) {
+  const extension = (src ?? "").split(".", 2).at(1)?.toLowerCase();
+  return <video preload="metadata" {...props}>
+    <source src={src} type={`video/${extension}`} />
+  </video>
+}
+
 export default function PostSection({
   className,
   post,
@@ -50,8 +57,8 @@ export default function PostSection({
             <Badge key={e}>{e}</Badge>
           ))}
         </div>
-        <div className="prose max-w-7xl">
-          <TinaMarkdown components={{ img: MdxImg }} content={post.body} />
+        <div className="prose prose-video:mx-auto max-w-7xl">
+          <TinaMarkdown components={{ img: MdxImg, video: MdxVideo }} content={post.body} />
         </div>
       </div>
     </section>

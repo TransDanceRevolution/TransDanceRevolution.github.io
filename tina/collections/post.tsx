@@ -33,6 +33,42 @@ export const Post: Collection = {
       name: "body",
       label: "Body",
       isBody: true,
+      templates: [
+        {
+          name: "video",
+          label: "Video",
+          ui: {
+            defaultItem: {
+              src: "",
+              width: "100%",
+              height: undefined,
+              controls: true,
+            },
+          },
+          fields: [
+            {
+              name: "src",
+              label: "Source",
+              type: "image",
+            },
+            {
+              name: "width",
+              label: "Width",
+              type: "string",
+            },
+            {
+              name: "height",
+              label: "Height",
+              type: "string",
+            },
+            {
+              name: "controls",
+              label: "Enable Controls",
+              type: "boolean",
+            }
+          ]
+        }
+      ]
     },
     {
       type: "boolean",
