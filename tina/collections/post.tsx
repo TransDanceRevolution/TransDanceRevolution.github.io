@@ -50,6 +50,7 @@ export const Post: Collection = {
               name: "src",
               label: "Source",
               type: "image",
+              required: true,
             },
             {
               name: "width",
