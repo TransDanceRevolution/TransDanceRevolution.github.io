@@ -3,6 +3,7 @@ import type { Route } from "./+types/post"
 import { isRouteErrorResponse, useLoaderData } from "react-router"
 import PostSection from "~/components/post/post-section"
 import { PostDocument } from "tina/__generated__/types"
+import React from "react"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
@@ -22,44 +23,47 @@ export const meta: Route.MetaFunction = ({ loaderData }) => {
   ]
 }
 
-// export function ErrorBoundary({ error, params }: Route.ErrorBoundaryProps) {
-//   const { data } = useTina({
-//     data: {},
-//     query: PostDocument,
-//     variables: { relativePath: `${params.slug}.mdx` },
-//   })
-//   console.log(data)
-//   if ("post" in data) {
-//     return <PostSection post={data.post as any} />
-//   }
+export function ErrorBoundary({ error, params }: Route.ErrorBoundaryProps) {
+  // options need to be memo'd for some reason to prevent excessive rerender.
+  const query = React.useMemo(() => ({
+    data: { post: {} },
+    query: PostDocument,
+    variables: { relativePath: `${params.slug}.mdx` },
+  } satisfies Parameters<typeof useTina>[0]), [params.slug]);
+  const { data } = useTina(query);
+  
+  // only show preview if post section is correctly set
+  if (Object.keys(data.post).length > 1) {
+    return <PostSection post={data.post as any} />;
+  }
 
-//   let message = "Oops!"
-//   let details = "An unexpected error occurred."
-//   let stack: string | undefined
+  let message = "Oops!"
+  let details = "An unexpected error occurred."
+  let stack: string | undefined
 
-//   if (isRouteErrorResponse(error)) {
-//     message = error.status === 404 ? "404" : "Error"
-//     details =
-//       error.status === 404
-//         ? "The requested page could not be found."
-//         : error.statusText || details
-//   } else if (import.meta.env.DEV && error && error instanceof Error) {
-//     details = error.message
-//     stack = error.stack
-//   }
+  if (isRouteErrorResponse(error)) {
+    message = error.status === 404 ? "404" : "Error"
+    details =
+      error.status === 404
+        ? "The requested page could not be found."
+        : error.statusText || details
+  } else if (import.meta.env.DEV && error && error instanceof Error) {
+    details = error.message
+    stack = error.stack
+  }
 
-//   return (
-//     <main className="container mx-auto p-4 pt-16">
-//       <h1>{message}</h1>
-//       <p>{details}</p>
-//       {stack && (
-//         <pre className="w-full overflow-x-auto p-4">
-//           <code>{stack}</code>
-//         </pre>
-//       )}
-//     </main>
-//   )
-// }
+  return (
+    <main className="container mx-auto p-4 pt-16">
+      <h1>{message}</h1>
+      <p>{details}</p>
+      {stack && (
+        <pre className="w-full overflow-x-auto p-4">
+          <code>{stack}</code>
+        </pre>
+      )}
+    </main>
+  )
+}
 
 export default function Route() {
   const loaderData = useLoaderData<typeof loader>()
