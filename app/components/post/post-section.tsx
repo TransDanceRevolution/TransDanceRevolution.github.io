@@ -14,7 +14,7 @@ function MdxImg(
     | undefined
 ) {
   const pathname = props?.url.replace(/^.*?:\/\/.*?\//, "")
-  const extension = (pathname ?? "").split(".", 2).at(1)?.toLowerCase()
+  const extension = (pathname ?? "").match(/(.*)\.(.*)$/)?.at(-1)?.toLowerCase();
 
   if (extension != null && videoExtensions.includes(extension)) {
     return (
@@ -29,7 +29,7 @@ function MdxImg(
 }
 
 function MdxVideo({ src, ...props }: any) {
-  const extension = (src ?? "").split(".", 2).at(1)?.toLowerCase()
+  const extension = (src as string | undefined ?? "").match(/(.*)\.(.*)$/)?.at(-1)?.toLowerCase();
   return (
     <video preload="metadata" {...props}>
       <source src={src} type={`video/${extension}`} />
