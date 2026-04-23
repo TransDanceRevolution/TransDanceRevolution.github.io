@@ -91,10 +91,11 @@ export default function PostSection({
       className={cn("flex w-full items-center justify-center p-3", className)}
     >
       <div className="w-full max-w-7xl space-y-3">
-        <h1 className="text-3xl">
+        <h1 className="text-3xl group">
           <mark className="bg-primary text-primary-foreground">
             {post.title}
           </mark>
+          <Link to={"#"} className="group-hover:opacity-100 opacity-0 transition-all inline-block ml-1.5"><LinkIcon size={18} /></Link>
         </h1>
         <div className="flex w-full gap-1 overflow-hidden">
           {post.tags?.map((e) => (
