@@ -75,8 +75,8 @@ function MdxVideo({ src, _content_source, ...props }: any) {
   )
 }
 
-function MdxIFrame({ _content_source, ...props }: any) {
-  return <iframe {...props} />;
+function MdxHtml({ value }: any) {
+  return <div dangerouslySetInnerHTML={{ __html: value }} />;
 }
 
 export default function PostSection({
@@ -107,13 +107,13 @@ export default function PostSection({
             components={{
               img: MdxImg,
               video: MdxVideo,
-              iframe: MdxIFrame,
               h1: MdxHeading,
               h2: MdxHeading,
               h3: MdxHeading,
               h4: MdxHeading,
               h5: MdxHeading,
               h6: MdxHeading,
+              html: MdxHtml,
             }}
             content={post.body}
           />

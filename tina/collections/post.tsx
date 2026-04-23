@@ -70,20 +70,20 @@ export const Post: Collection = {
             },
           ],
         },
-        {
-          name: "iframe",
-          label: "iFrame",
-          fields: [
-            ...(
-              [
-                ...Object.keys(htmlElements.iframe.attributes),
-                ...Object.keys(htmlElements["*"].attributes)
-              ]
-                .filter((e) => !e.includes("-"))
-                .map((e) => ({ name: e, type: "string" } as any))
-            ),
-          ],
-        },
+        // {
+        //   name: "iframe",
+        //   label: "iFrame",
+        //   fields: [
+        //     ...(
+        //       [
+        //         ...Object.keys(htmlElements.iframe.attributes),
+        //         ...Object.keys(htmlElements["*"].attributes)
+        //       ]
+        //         .filter((e) => !e.includes("-"))
+        //         .map((e) => ({ name: e, type: "string" } as any))
+        //     ),
+        //   ],
+        // },
       ],
     },
     {
