@@ -78,13 +78,25 @@ function MdxImg(
   return <img {...props} />
 }
 
-function MdxVideo({ src, _content_source, ...props }: any) {
+function MdxVideo({ src, style, _content_source, ...props }: any) {
   const extension = ((src as string | undefined) ?? "")
     .match(/(.*)\.(.*)$/)
     ?.at(-1)
     ?.toLowerCase()
+  const height = React.useMemo(() => {
+    const h = props.height
+    if (typeof h !== "string" || h.length === 0 || h.search(/\D/) !== -1) {
+      return h
+    }
+    try {
+      return Number.parseInt(h)
+    } catch (_: any) {
+      return h
+    }
+  }, [props])
+  console.log(height)
   return (
-    <video preload="metadata" {...props}>
+    <video preload="metadata" style={{ ...style, height }} {...props}>
       <source src={src} type={`video/${extension}`} />
     </video>
   )
