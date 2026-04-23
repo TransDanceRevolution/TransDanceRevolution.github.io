@@ -35,13 +35,16 @@ function MdxHeading({ children, type, _content_source, ...props }: any) {
       ...[children].flatMap((e, i) => (
         <React.Fragment key={i + 1}>{e}</React.Fragment>
       )),
-      <Link
-        key={0}
-        to={`#${id}`}
-        className="ml-1.5 inline-block align-middle opacity-0 transition-all group-hover:opacity-100"
-      >
-        <LinkIcon size={18} />
-      </Link>,
+      id && (
+        <Link
+          key={0}
+          to={`#${id}`}
+          className="ml-1.5 inline-block align-middle opacity-0 transition-all group-hover:opacity-100"
+          title={id}
+        >
+          <LinkIcon size={18} />
+        </Link>
+      ),
     ]
   )
 

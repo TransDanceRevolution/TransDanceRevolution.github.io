@@ -107,6 +107,7 @@ export default function Route() {
         <Button
           size={"icon"}
           nativeButton={false}
+          title="Edit Post"
           render={(props) => (
             <Link to={`/admin/index.html#/~${location.pathname}`} {...props}>
               <PencilIcon />
