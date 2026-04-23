@@ -89,15 +89,25 @@ export default function Route() {
     if (window == undefined || window.self !== window.top) {
       return
     }
-    const tinacmsAuth = window.localStorage.getItem("tinacms-auth")
-    if (
-      tinacmsAuth == null ||
-      tinacmsAuth === "null" ||
-      tinacmsAuth.length == 0
-    ) {
-      return
+    const storageCb = () => {
+      const tinacmsAuth = window.localStorage.getItem("tinacms-auth")
+      const tinacmsLocalLoggedIn = window.localStorage.getItem(
+        "tina.local.isLogedIn"
+      )
+      if (
+        (tinacmsAuth != null &&
+          tinacmsAuth.length > 0 &&
+          tinacmsAuth !== "null") ||
+        tinacmsLocalLoggedIn === "true"
+      ) {
+        setDisplayEdit(true)
+        return
+      }
+      setDisplayEdit(false)
     }
-    setDisplayEdit(true)
+    storageCb()
+    window.addEventListener("storage", storageCb)
+    return () => window.removeEventListener("storage", storageCb)
   }, [])
 
   return (
