@@ -16,7 +16,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "./components/ui/navigation-menu"
 import React from "react"
 import AcknowledgementOfCountryDialog from "./components/acknowledgement-of-country/acknowledgement-of-country-dialog"

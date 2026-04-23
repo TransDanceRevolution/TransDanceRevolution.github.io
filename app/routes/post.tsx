@@ -90,7 +90,11 @@ export default function Route() {
       return
     }
     const tinacmsAuth = window.localStorage.getItem("tinacms-auth")
-    if (tinacmsAuth == null || tinacmsAuth.length == 0) {
+    if (
+      tinacmsAuth == null ||
+      tinacmsAuth === "null" ||
+      tinacmsAuth.length == 0
+    ) {
       return
     }
     setDisplayEdit(true)
