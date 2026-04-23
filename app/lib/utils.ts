@@ -11,5 +11,5 @@ export function slugify(str: string) {
     .replace(/[^a-z0-9 -]/g, "") // Remove invalid characters
     .replace(/\s+/g, "-") // Replace spaces with hyphens
     .replace(/-+/g, "-") // Replace multiple hyphens with a single hyphen
-    .replace(/^-+|-+$/g, "");
+    .replace(/^-+|-+$/g, "")
 }

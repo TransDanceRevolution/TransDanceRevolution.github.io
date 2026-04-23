@@ -20,8 +20,8 @@ function MdxHeading({ children, type, _content_source, ...props }: any) {
       children.props.content[0].type === "text" &&
       typeof children.props.content[0].text === "string"
     ) {
-      const textContent: string = children.props.content[0].text;
-      return slugify(textContent);
+      const textContent: string = children.props.content[0].text
+      return slugify(textContent)
     }
   }, [children])
   const Heading = React.createElement(
@@ -32,27 +32,36 @@ function MdxHeading({ children, type, _content_source, ...props }: any) {
       id,
     },
     [
-      ...[children].flatMap((e, i) => <React.Fragment key={i + 1}>{e}</React.Fragment>),
-      (
-        <Link key={0} to={`#${id}`} className="group-hover:opacity-100 opacity-0 transition-all inline-block align-middle ml-1.5"><LinkIcon size={18} /></Link>
-      ),
+      ...[children].flatMap((e, i) => (
+        <React.Fragment key={i + 1}>{e}</React.Fragment>
+      )),
+      <Link
+        key={0}
+        to={`#${id}`}
+        className="ml-1.5 inline-block align-middle opacity-0 transition-all group-hover:opacity-100"
+      >
+        <LinkIcon size={18} />
+      </Link>,
     ]
-  );
+  )
 
-  return Heading;
+  return Heading
 }
 
 function MdxImg(
   props:
     | {
-      url: string
-      caption?: string | undefined
-      alt?: string | undefined
-    }
+        url: string
+        caption?: string | undefined
+        alt?: string | undefined
+      }
     | undefined
 ) {
   const pathname = props?.url.replace(/^.*?:\/\/.*?\//, "")
-  const extension = (pathname ?? "").match(/(.*)\.(.*)$/)?.at(-1)?.toLowerCase();
+  const extension = (pathname ?? "")
+    .match(/(.*)\.(.*)$/)
+    ?.at(-1)
+    ?.toLowerCase()
 
   if (extension != null && videoExtensions.includes(extension)) {
     return (
@@ -67,7 +76,10 @@ function MdxImg(
 }
 
 function MdxVideo({ src, _content_source, ...props }: any) {
-  const extension = (src as string | undefined ?? "").match(/(.*)\.(.*)$/)?.at(-1)?.toLowerCase();
+  const extension = ((src as string | undefined) ?? "")
+    .match(/(.*)\.(.*)$/)
+    ?.at(-1)
+    ?.toLowerCase()
   return (
     <video preload="metadata" {...props}>
       <source src={src} type={`video/${extension}`} />
@@ -76,7 +88,7 @@ function MdxVideo({ src, _content_source, ...props }: any) {
 }
 
 function MdxHtml({ value }: any) {
-  return <div dangerouslySetInnerHTML={{ __html: value }} />;
+  return <div dangerouslySetInnerHTML={{ __html: value }} />
 }
 
 export default function PostSection({
@@ -91,11 +103,16 @@ export default function PostSection({
       className={cn("flex w-full items-center justify-center p-3", className)}
     >
       <div className="w-full max-w-7xl space-y-3">
-        <h1 className="text-3xl group">
+        <h1 className="group text-3xl">
           <mark className="bg-primary text-primary-foreground">
             {post.title}
           </mark>
-          <Link to={"#"} className="group-hover:opacity-100 opacity-0 transition-all inline-block align-middle ml-1.5"><LinkIcon size={18} /></Link>
+          <Link
+            to={"#"}
+            className="ml-1.5 inline-block align-middle opacity-0 transition-all group-hover:opacity-100"
+          >
+            <LinkIcon size={18} />
+          </Link>
         </h1>
         <div className="flex w-full gap-1 overflow-hidden">
           {post.tags?.map((e) => (
