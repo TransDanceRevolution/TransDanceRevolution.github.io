@@ -2,15 +2,53 @@ import { TinaMarkdown } from "tinacms/dist/rich-text"
 import { Badge } from "../ui/badge"
 import { videoExtensions } from "~/lib/consts"
 import type { PostQuery } from "~/../tina/__generated__/types"
-import { cn } from "~/lib/utils"
+import { cn, slugify } from "~/lib/utils"
+import * as React from "react"
+import { Link } from "react-router"
+import { LinkIcon } from "lucide-react"
+
+function MdxHeading({ children, type, _content_source, ...props }: any) {
+  const id = React.useMemo(() => {
+    if (
+      children != null &&
+      typeof children === "object" &&
+      "props" in children &&
+      "content" in children.props &&
+      Array.isArray(children.props.content) &&
+      children.props.content.length > 0 &&
+      "type" in children.props.content[0] &&
+      children.props.content[0].type === "text" &&
+      typeof children.props.content[0].text === "string"
+    ) {
+      const textContent: string = children.props.content[0].text;
+      return slugify(textContent);
+    }
+  }, [children])
+  const Heading = React.createElement(
+    type,
+    {
+      ...props,
+      className: "group",
+      id,
+    },
+    [
+      ...[children].flatMap((e, i) => <React.Fragment key={i + 1}>{e}</React.Fragment>),
+      (
+        <Link key={0} to={`#${id}`} className="group-hover:opacity-100 opacity-0 transition-all inline-block ml-1.5 translate-y-0.5"><LinkIcon size={18} /></Link>
+      ),
+    ]
+  );
+
+  return Heading;
+}
 
 function MdxImg(
   props:
     | {
-        url: string
-        caption?: string | undefined
-        alt?: string | undefined
-      }
+      url: string
+      caption?: string | undefined
+      alt?: string | undefined
+    }
     | undefined
 ) {
   const pathname = props?.url.replace(/^.*?:\/\/.*?\//, "")
@@ -28,7 +66,7 @@ function MdxImg(
   return <img {...props} />
 }
 
-function MdxVideo({ src, ...props }: any) {
+function MdxVideo({ src, _content_source, ...props }: any) {
   const extension = (src as string | undefined ?? "").match(/(.*)\.(.*)$/)?.at(-1)?.toLowerCase();
   return (
     <video preload="metadata" {...props}>
@@ -37,7 +75,7 @@ function MdxVideo({ src, ...props }: any) {
   )
 }
 
-function MdxIFrame(props: any) {
+function MdxIFrame({ _content_source, ...props }: any) {
   return <iframe {...props} />;
 }
 
@@ -65,7 +103,17 @@ export default function PostSection({
         </div>
         <div className="prose max-w-7xl prose-video:mx-auto">
           <TinaMarkdown
-            components={{ img: MdxImg, video: MdxVideo, iframe: MdxIFrame }}
+            components={{
+              img: MdxImg,
+              video: MdxVideo,
+              iframe: MdxIFrame,
+              h1: MdxHeading,
+              h2: MdxHeading,
+              h3: MdxHeading,
+              h4: MdxHeading,
+              h5: MdxHeading,
+              h6: MdxHeading,
+            }}
             content={post.body}
           />
         </div>

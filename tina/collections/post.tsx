@@ -1,5 +1,4 @@
 import htmlElements from "./html-elements.json";
-console.log(htmlElements);
 import type { Collection } from "tinacms"
 export const Post: Collection = {
   name: "post",
