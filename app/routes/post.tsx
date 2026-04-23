@@ -1,9 +1,17 @@
 import { useTina } from "tinacms/dist/react"
 import type { Route } from "./+types/post"
-import { isRouteErrorResponse, useLoaderData } from "react-router"
+import {
+  isRouteErrorResponse,
+  Link,
+  useLoaderData,
+  useLocation,
+} from "react-router"
 import PostSection from "~/components/post/post-section"
 import { PostDocument } from "tina/__generated__/types"
 import React from "react"
+import { Button } from "~/components/ui/button"
+import { PencilIcon } from "lucide-react"
+import { cn } from "~/lib/utils"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
@@ -71,7 +79,37 @@ export function ErrorBoundary({ error, params }: Route.ErrorBoundaryProps) {
 
 export default function Route() {
   const loaderData = useLoaderData<typeof loader>()
+  const location = useLocation()
   const { data } = useTina(loaderData)
 
-  return <PostSection post={data.post} />
+  const [displayEdit, setDisplayEdit] = React.useState(false)
+
+  React.useEffect(() => {
+    // if on server or in iframe, skip this
+    if (window == undefined || window.self !== window.top) {
+      return
+    }
+    const tinacmsAuth = window.localStorage.getItem("tinacms-auth")
+    if (tinacmsAuth == null || tinacmsAuth.length == 0) {
+      return
+    }
+    setDisplayEdit(true)
+  }, [])
+
+  return (
+    <>
+      <PostSection post={data.post} />
+      <div className={cn("fixed right-5 bottom-5", !displayEdit && "hidden")}>
+        <Button
+          size={"icon"}
+          nativeButton={false}
+          render={(props) => (
+            <Link to={`/admin/index.html#/~${location.pathname}`} {...props}>
+              <PencilIcon />
+            </Link>
+          )}
+        />
+      </div>
+    </>
+  )
 }

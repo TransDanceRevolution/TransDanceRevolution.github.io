@@ -35,8 +35,8 @@ const paths: Record<string, { path: string; match?: RegExp }> = {
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
   React.useEffect(() => {
-    if (location.pathname.search(/\/admin($|\/)/) !== -1) {
-      window.location.pathname = "/admin/index.html"
+    if (window != null && location.pathname.search(/\/admin($|\/.*)/) !== -1) {
+      window.location.reload()
     }
   }, [location])
   const { shouldShow: shouldShow_, setShown } = useDialogStore()
