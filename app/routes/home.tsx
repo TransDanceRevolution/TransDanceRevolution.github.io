@@ -123,7 +123,7 @@ export default function Home() {
               ))}
             </TabsList>
             {Object.entries(places).map(([n, { Description, Content }]) => (
-              <TabsContent key={n} id={n} value={n}>
+              <TabsContent className={"scroll-m-16"} key={n} id={n} value={n}>
                 <Card>
                   <CardHeader>
                     <CardTitle>{n}</CardTitle>
