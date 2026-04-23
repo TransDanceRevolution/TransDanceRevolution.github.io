@@ -34,7 +34,7 @@ function MdxHeading({ children, type, _content_source, ...props }: any) {
     [
       ...[children].flatMap((e, i) => <React.Fragment key={i + 1}>{e}</React.Fragment>),
       (
-        <Link key={0} to={`#${id}`} className="group-hover:opacity-100 opacity-0 transition-all inline-block ml-1.5 translate-y-0.5"><LinkIcon size={18} /></Link>
+        <Link key={0} to={`#${id}`} className="group-hover:opacity-100 opacity-0 transition-all inline-block align-middle ml-1.5"><LinkIcon size={18} /></Link>
       ),
     ]
   );
@@ -95,7 +95,7 @@ export default function PostSection({
           <mark className="bg-primary text-primary-foreground">
             {post.title}
           </mark>
-          <Link to={"#"} className="group-hover:opacity-100 opacity-0 transition-all inline-block ml-1.5"><LinkIcon size={18} /></Link>
+          <Link to={"#"} className="group-hover:opacity-100 opacity-0 transition-all inline-block align-middle ml-1.5"><LinkIcon size={18} /></Link>
         </h1>
         <div className="flex w-full gap-1 overflow-hidden">
           {post.tags?.map((e) => (
