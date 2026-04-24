@@ -3,27 +3,31 @@ import moriartyWalk from "./img/ICC_Sydney_Convention_Centre_Moriarty_Walk_2017.
 import imaxImage from "./img/IMAX_Melbourne_Museum.jpg"
 import NaarmDescription from "./descriptions/naarm-description.mdx"
 import GadigalDescription from "./descriptions/gadigal-description.mdx"
-import NaarmJamLocation from "./descriptions/naarm-jam-location"
+// import NaarmJamLocation from "./descriptions/naarm-jam-location"
 import { cn } from "~/lib/utils"
 
-export const slideshowImages: React.FC<{ className: string }>[] = [
-  ({ className }) => (
-    <img
-      alt="Dancers Alley Billboard"
-      className={className}
-      src={dancersAlleyImage}
-    />
-  ),
-  ({ className }) => (
-    <img alt="Dancers Alley" className={className} src={moriartyWalk} />
-  ),
-  ({ className }) => (
-    <img
-      alt="IMAX Melbourne"
-      className={cn("object-[50%_85%]", className)}
-      src={imaxImage}
-    />
-  ),
+export const slideshowImages: {
+  title: string
+  render: React.FC<{ className: string; alt: string }>
+}[] = [
+  {
+    title: "Dancers Alley, Sydney",
+    render: (props) => <img src={dancersAlleyImage} {...props} />,
+  },
+  {
+    title: "Dancers Alley, Sydney",
+    render: (props) => <img src={moriartyWalk} {...props} />,
+  },
+  {
+    title: "IMAX Theatre, Melbourne",
+    render: ({ className, ...props }) => (
+      <img
+        className={cn("object-[50%_85%]", className)}
+        src={imaxImage}
+        {...props}
+      />
+    ),
+  },
 ]
 
 export const places: {

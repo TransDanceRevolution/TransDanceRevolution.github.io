@@ -51,9 +51,15 @@ export default function Home() {
         setApi={setApi}
       >
         <CarouselContent className="-ml-0">
-          {slideshowImages.map((Image, i) => (
-            <CarouselItem key={i} className="pl-0">
-              <Image className="h-96 min-h-0 w-full min-w-0 object-cover md:h-200" />
+          {slideshowImages.map(({ title, render: Image }, i) => (
+            <CarouselItem key={i} className="relative pl-0">
+              <Image
+                alt={title}
+                className="h-96 min-h-0 w-full min-w-0 object-cover md:h-200"
+              />
+              <div className="absolute inset-x-0 top-0 mx-auto max-w-7xl px-3">
+                <div className="inline-block bg-secondary">{title}</div>
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -85,7 +91,7 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-3 p-3 md:flex-row md:items-stretch">
-        <div className="w-full max-w-md space-y-3 md:max-w-full">
+        <div className="w-full space-y-3 sm:max-w-md md:max-w-full">
           <Card className="flex">
             <CardHeader className="h-full">
               <CardTitle>Why?</CardTitle>
@@ -107,7 +113,7 @@ export default function Home() {
             </CardHeader>
           </Card>
         </div>
-        <div className="w-full max-w-md">
+        <div className="w-full sm:max-w-md">
           <Tabs value={place} className={"top-18 md:sticky"}>
             <TabsList className={"w-full"}>
               <div className="w-full pl-2 text-xs">
