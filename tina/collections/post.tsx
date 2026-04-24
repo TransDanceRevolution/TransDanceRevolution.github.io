@@ -64,8 +64,27 @@ export const Post: Collection = {
               type: "string",
             },
             {
+              name: "loop",
+              label: "Enable Looping",
+              description: "If specified, the browser will automatically seek back to the start upon reaching the end of the video.",
+              type: "boolean",
+            },
+            {
+              name: "muted",
+              label: "Enable Auto-Mute",
+              description: "A Boolean attribute that indicates the default audio mute setting contained in the video. If set, the audio will be initially silenced.",
+              type: "boolean",
+            },
+            {
               name: "controls",
               label: "Enable Controls",
+              description: "If this attribute is present, the browser will offer controls to allow the user to control video playback, including volume, seeking, and pause/resume playback.",
+              type: "boolean",
+            },
+            {
+              name: "autoplay",
+              label: "Enable Autoplay",
+              description: "Modern browsers may block audio (or videos with an unmuted audio track) from autoplaying, as sites that automatically play audio can be an unpleasant experience for users.",
               type: "boolean",
             },
           ],
