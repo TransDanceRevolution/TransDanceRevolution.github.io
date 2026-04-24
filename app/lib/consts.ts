@@ -1,3 +1,16 @@
+export const postTags = [
+  // post types
+  "choreo",
+  "article",
+  // styles
+  "popping",
+  "shuffling",
+  "cutting shapes",
+  // locations,
+  "naarm",
+  "gadigal",
+]
+
 export const videoExtensions = [
   "3g2",
   "3gp",
