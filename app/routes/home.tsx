@@ -52,14 +52,16 @@ export default function Home() {
       >
         <CarouselContent className="-ml-0">
           {slideshowImages.map(({ title, render: Image }, i) => (
-            <CarouselItem key={i} className="relative pl-0">
-              <Image
-                alt={title}
-                className="h-96 min-h-0 w-full min-w-0 object-cover md:h-200"
-              />
-              <div className="absolute inset-x-0 top-0 mx-auto max-w-7xl px-3">
-                <div className="inline-block bg-secondary">{title}</div>
-              </div>
+            <CarouselItem key={i} className="pl-0">
+              <figure className="relative">
+                <Image
+                  alt={title}
+                  className="h-96 min-h-0 w-full min-w-0 object-cover md:h-200"
+                />
+                <figcaption className="absolute inset-x-0 top-0 mx-auto max-w-7xl px-3">
+                  <span className="inline-block bg-secondary">{title}</span>
+                </figcaption>
+              </figure>
             </CarouselItem>
           ))}
         </CarouselContent>
