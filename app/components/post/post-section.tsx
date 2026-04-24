@@ -94,7 +94,6 @@ function MdxVideo({ src, style, _content_source, ...props }: any) {
       return h
     }
   }, [props])
-  console.log(height)
   return (
     <video preload="metadata" style={{ ...style, height }} {...props}>
       <source src={src} type={`video/${extension}`} />
@@ -102,8 +101,9 @@ function MdxVideo({ src, style, _content_source, ...props }: any) {
   )
 }
 
-function MdxHtml({ value }: any) {
-  return <div dangerouslySetInnerHTML={{ __html: value }} />
+function MdxHtml(props: { value: string } | undefined) {
+  if (props == null) return <></>
+  return <div dangerouslySetInnerHTML={{ __html: props.value }} />
 }
 
 export default function PostSection({
