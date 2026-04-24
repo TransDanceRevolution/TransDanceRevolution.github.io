@@ -119,7 +119,7 @@ export default function Route() {
           nativeButton={false}
           title="Edit Post"
           render={(props) => (
-            <Link to={`/admin/index.html#/~${location.pathname}`} {...props}>
+            <Link reloadDocument={true} to={`/admin/index.html#/~${location.pathname}`} {...props}>
               <PencilIcon />
             </Link>
           )}
