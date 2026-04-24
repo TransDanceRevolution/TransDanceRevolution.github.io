@@ -118,17 +118,24 @@ export default function PostSection({
       className={cn("flex w-full items-center justify-center p-3", className)}
     >
       <div className="w-full max-w-7xl space-y-3">
-        <h1 className="group text-3xl">
-          <mark className="bg-primary text-primary-foreground">
-            {post.title}
-          </mark>
-          <Link
-            to={"#"}
-            className="ml-1.5 inline-block align-middle opacity-0 transition-all group-hover:opacity-100"
-          >
-            <LinkIcon size={18} />
-          </Link>
-        </h1>
+        <div>
+          <h1 className="group text-3xl">
+            <mark className="bg-primary text-primary-foreground">
+              {post.title}
+            </mark>
+            <Link
+              to={"#"}
+              className="ml-1.5 inline-block align-middle opacity-0 transition-all group-hover:opacity-100"
+            >
+              <LinkIcon size={18} />
+            </Link>
+          </h1>
+          <p>
+            <mark className="bg-secondary">
+              Created On: {new Date(post.date).toDateString()}
+            </mark>
+          </p>
+        </div>
         <div className="flex w-full gap-1 overflow-hidden">
           {post.tags?.map((e) => (
             <Badge key={e}>{e}</Badge>

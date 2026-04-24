@@ -1,4 +1,4 @@
-import htmlElements from "./html-elements.json"
+// import htmlElements from "./html-elements.json"
 import type { Collection } from "tinacms"
 export const Post: Collection = {
   name: "post",
