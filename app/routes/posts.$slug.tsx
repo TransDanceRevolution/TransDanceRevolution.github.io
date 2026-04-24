@@ -1,5 +1,5 @@
 import { useTina } from "tinacms/dist/react"
-import type { Route } from "./+types/post"
+import type { Route } from "./+types/posts.$slug"
 import {
   isRouteErrorResponse,
   Link,
