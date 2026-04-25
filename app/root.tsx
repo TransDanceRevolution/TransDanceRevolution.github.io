@@ -56,7 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           onOpenChange={setShown}
         />
         <div id="navbar" className="sticky inset-y-0 top-0 z-50 bg-background">
-          <div className="mx-auto flex h-16 w-full max-w-7xl justify-between p-3">
+          <div className="mx-auto flex h-navbar w-full max-w-7xl justify-between p-3">
             <Link className="w-32" to="/">
               <img
                 alt="TDR Logo"

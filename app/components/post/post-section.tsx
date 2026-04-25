@@ -28,7 +28,7 @@ function MdxHeading({ children, type, _content_source, ...props }: any) {
     type,
     {
       ...props,
-      className: "group scroll-m-16",
+      className: "group scroll-m-navbar",
       id,
     },
     [
