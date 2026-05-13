@@ -20,6 +20,7 @@ import {
 import React from "react"
 import AcknowledgementOfCountryDialog from "./components/acknowledgement-of-country/acknowledgement-of-country-dialog"
 import { useDialogStore } from "./stores/dialog"
+import { IsAdminProvider } from "./contexts/is-admin-context"
 
 const paths: Record<string, { path: string; match?: RegExp }> = {
   Home: {
@@ -35,7 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
   React.useEffect(() => {
     if (window != null && location.pathname.search(/\/admin($|\/.*)/) !== -1) {
-      window.location.reload()
+      window.location.pathname = "/admin/index.html"
     }
   }, [location])
   const { shouldShow: shouldShow_, setShown } = useDialogStore()
@@ -107,7 +108,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />
+  return (
+    <IsAdminProvider>
+      <Outlet />
+    </IsAdminProvider>
+  )
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

@@ -12,6 +12,7 @@ import React from "react"
 import { Button } from "~/components/ui/button"
 import { PencilIcon } from "lucide-react"
 import { cn } from "~/lib/utils"
+import { useIsAdmin } from "~/contexts/is-admin-context"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
@@ -82,38 +83,12 @@ export default function Route() {
   const location = useLocation()
   const { data } = useTina(loaderData)
 
-  const [displayEdit, setDisplayEdit] = React.useState(false)
-
-  React.useEffect(() => {
-    // if on server or in iframe, skip this
-    if (window == undefined || window.self !== window.top) {
-      return
-    }
-    const storageCb = () => {
-      const tinacmsAuth = window.localStorage.getItem("tinacms-auth")
-      const tinacmsLocalLoggedIn = window.localStorage.getItem(
-        "tina.local.isLogedIn"
-      )
-      if (
-        (tinacmsAuth != null &&
-          tinacmsAuth.length > 0 &&
-          tinacmsAuth !== "null") ||
-        tinacmsLocalLoggedIn === "true"
-      ) {
-        setDisplayEdit(true)
-        return
-      }
-      setDisplayEdit(false)
-    }
-    storageCb()
-    window.addEventListener("storage", storageCb)
-    return () => window.removeEventListener("storage", storageCb)
-  }, [])
+  const isAdmin = useIsAdmin();
 
   return (
     <>
       <PostSection post={data.post} />
-      <div className={cn("fixed right-5 bottom-5", !displayEdit && "hidden")}>
+      <div className={cn("fixed right-5 bottom-5", !isAdmin && "hidden")}>
         <Button
           size={"icon"}
           nativeButton={false}
