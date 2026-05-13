@@ -12,7 +12,7 @@ import React from "react"
 import { Button } from "~/components/ui/button"
 import { PencilIcon } from "lucide-react"
 import { cn } from "~/lib/utils"
-import { useIsAdmin } from "~/contexts/is-admin-context"
+import { useAdmin } from "~/contexts/admin-context"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { client } = await import("~/../tina/__generated__/client")
@@ -83,18 +83,27 @@ export default function Route() {
   const location = useLocation()
   const { data } = useTina(loaderData)
 
-  const isAdmin = useIsAdmin();
+  const { isAdmin, isInAdminPanel } = useAdmin()
 
   return (
     <>
       <PostSection post={data.post} />
-      <div className={cn("fixed right-5 bottom-5", !isAdmin && "hidden")}>
+      <div
+        className={cn(
+          "fixed right-5 bottom-5",
+          !isAdmin && !isInAdminPanel && "hidden"
+        )}
+      >
         <Button
           size={"icon"}
           nativeButton={false}
           title="Edit Post"
           render={(props) => (
-            <Link reloadDocument={true} to={`/admin/index.html#/~${location.pathname}`} {...props}>
+            <Link
+              reloadDocument={true}
+              to={`/admin/index.html#/~${location.pathname}`}
+              {...props}
+            >
               <PencilIcon />
             </Link>
           )}

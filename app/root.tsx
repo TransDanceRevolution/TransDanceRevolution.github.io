@@ -20,7 +20,7 @@ import {
 import React from "react"
 import AcknowledgementOfCountryDialog from "./components/acknowledgement-of-country/acknowledgement-of-country-dialog"
 import { useDialogStore } from "./stores/dialog"
-import { IsAdminProvider } from "./contexts/is-admin-context"
+import { AdminProvider } from "./contexts/admin-context"
 
 const paths: Record<string, { path: string; match?: RegExp }> = {
   Home: {
@@ -109,9 +109,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <IsAdminProvider>
+    <AdminProvider>
       <Outlet />
-    </IsAdminProvider>
+    </AdminProvider>
   )
 }
 

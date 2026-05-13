@@ -1,15 +1,14 @@
 import * as React from "react"
 
-export const IsAdminContext = React.createContext(false)
+export const AdminContext = React.createContext({
+  isAdmin: false,
+  isInAdminPanel: false,
+})
 
-export function IsAdminProvider({ children }: { children: React.ReactNode }) {
+export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = React.useState(false)
 
   React.useEffect(() => {
-    // if on server or in iframe, skip this
-    if (window == undefined || window.self !== window.top) {
-      return
-    }
     const storageCb = () => {
       const tinacmsAuth = window.localStorage.getItem("tinacms-auth")
       const tinacmsLocalLoggedIn = window.localStorage.getItem(
@@ -31,13 +30,28 @@ export function IsAdminProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("storage", storageCb)
   }, [setIsAdmin])
 
+  const isInAdminPanel = React.useMemo(() => {
+    if (typeof window === "undefined") {
+      return false
+    }
+    try {
+      return (
+        window.self !== window.top &&
+        window.location.hostname === window.top?.location.hostname &&
+        window.top?.location.pathname.search(/\/admin($|\/.*)/) !== -1
+      )
+    } catch (e) {
+      return false
+    }
+  }, [])
+
   return (
-    <IsAdminContext.Provider value={isAdmin}>
+    <AdminContext.Provider value={{ isAdmin, isInAdminPanel }}>
       {children}
-    </IsAdminContext.Provider>
+    </AdminContext.Provider>
   )
 }
 
-export function useIsAdmin() {
-  return React.useContext(IsAdminContext);
+export function useAdmin() {
+  return React.useContext(AdminContext)
 }
