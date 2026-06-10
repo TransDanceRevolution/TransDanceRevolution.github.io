@@ -42,7 +42,7 @@ export default function AcknowledgementOfCountryDialog({
   }, [timerRef])
   React.useEffect(() => {
     if (isDialogOpen) {
-      let remainingSecs_ = defaultReadingSecs ?? 5
+      let remainingSecs_ = defaultReadingSecs ?? 3
       const timeoutCb = () => {
         if (timerRef.current != null) {
           remainingSecs_--
