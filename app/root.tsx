@@ -98,7 +98,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <li><Link to="https://www.instagram.com/roxy.fury/">@roxy.fury</Link></li>
             </ul>
           </div> */}
-          <div className="text-xs">©2026 Trans Dance Revolution</div>
+          <div className="text-xs"><Link className="underline" to={"acknowledgment-of-country"}>Acknowledgment of Country</Link> | ©2026 Trans Dance Revolution</div>
         </div>
         <ScrollRestoration />
         <Scripts />

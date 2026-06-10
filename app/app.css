@@ -133,4 +133,5 @@
 
 @theme {
   --spacing-navbar: 64px;
+  --spacing-safe-screen: calc(100vh - var(--spacing-navbar))
 }
