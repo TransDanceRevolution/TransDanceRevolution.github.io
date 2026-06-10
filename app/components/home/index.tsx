@@ -36,6 +36,19 @@ export const places: {
     Content: React.ComponentType
   }
 } = {
+  Gadigal: {
+    Description: GadigalDescription,
+    Content: () => (
+      <div className="relative border pb-[calc(100%+52px)] shadow">
+        <iframe
+          className="absolute inset-0 h-full w-full"
+          src="https://www.instagram.com/p/DWLam2LE82U/embed/"
+          scrolling="no"
+          loading="lazy"
+        />
+      </div>
+    ),
+  },
   Naarm: {
     Description: () => (
       <>
@@ -48,19 +61,6 @@ export const places: {
         <iframe
           className="absolute inset-0 h-full w-full"
           src="https://www.instagram.com/p/DUzTTX_j_NK/embed/"
-          scrolling="no"
-          loading="lazy"
-        />
-      </div>
-    ),
-  },
-  Gadigal: {
-    Description: GadigalDescription,
-    Content: () => (
-      <div className="relative border pb-[calc(100%+52px)] shadow">
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          src="https://www.instagram.com/p/DWLam2LE82U/embed/"
           scrolling="no"
           loading="lazy"
         />
