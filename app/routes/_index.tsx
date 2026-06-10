@@ -37,7 +37,7 @@ export default function Home() {
     [location]
   )
   const place = React.useMemo(
-    () => (hashValue in places ? hashValue : "Naarm"),
+    () => (hashValue in places ? hashValue : Object.keys(places)[0]),
     [hashValue]
   )
   return (

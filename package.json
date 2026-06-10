@@ -61,9 +61,13 @@
       "react": "^19",
       "react-dom": "^19"
     },
+    "tinacms": {
+      "react-router-dom": "^7"
+    },
     "@tinacms/app": {
       "react": "^19",
-      "react-dom": "^19"
+      "react-dom": "^19",
+      "react-router-dom": "^7"
     },
     "react-final-form": {
       "react": "^19",
