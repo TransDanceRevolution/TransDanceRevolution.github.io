@@ -8,19 +8,28 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "~/components/ui/dialog"
 import AcknowledgementOfCountryContent from "./acknowledgement-of-country-content.mdx"
 import type { DialogRoot } from "@base-ui/react"
 import React from "react"
 
-export default function AcknowledgementOfCountryDialog(
-  props: Omit<DialogRoot.Props, "children">
-) {
+type AcknowledgementOfCountryDialogProps = Omit<
+  DialogRoot.Props,
+  "children"
+> & {
+  defaultReadingSecs?: number
+}
+
+export default function AcknowledgementOfCountryDialog({
+  handle,
+  defaultReadingSecs,
+  ...props
+}: AcknowledgementOfCountryDialogProps) {
   const dialogHandle = React.useMemo(
-    () => BaseDialog.createHandle() ?? props.handle,
-    [props.handle]
+    () => BaseDialog.createHandle() ?? handle,
+    [handle]
   )
+
   const isDialogOpen = dialogHandle.store.useState("open")
   const timerRef = React.useRef<number>(undefined)
   const [remainingSecs, setRemainingSecs] = React.useState(0)
@@ -33,7 +42,7 @@ export default function AcknowledgementOfCountryDialog(
   }, [timerRef])
   React.useEffect(() => {
     if (isDialogOpen) {
-      let remainingSecs_ = 3
+      let remainingSecs_ = defaultReadingSecs ?? 5
       const timeoutCb = () => {
         if (timerRef.current != null) {
           remainingSecs_--
