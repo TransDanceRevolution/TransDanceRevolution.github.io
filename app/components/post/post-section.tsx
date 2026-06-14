@@ -141,7 +141,7 @@ export default function PostSection({
             <Badge key={e}>{e}</Badge>
           ))}
         </div>
-        <div className="prose max-w-7xl prose-video:mx-auto">
+        <div className="prose prose-sm lg:prose-base max-w-7xl prose-video:mx-auto">
           <TinaMarkdown
             components={{
               img: MdxImg,

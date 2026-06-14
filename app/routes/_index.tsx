@@ -135,7 +135,7 @@ export default function Home() {
                 <Card>
                   <CardHeader>
                     <CardTitle>{n}</CardTitle>
-                    <CardDescription className="prose">
+                    <CardDescription className="prose prose-sm">
                       <Description />
                     </CardDescription>
                   </CardHeader>
